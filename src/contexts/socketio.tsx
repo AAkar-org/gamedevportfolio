@@ -6,6 +6,7 @@ import React, {
   SetStateAction,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -112,6 +113,10 @@ const SocketContextProvider = ({ children }: { children: ReactNode }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [users, setUsers] = useState<User[]>([]);
   const [msgs, setMsgs] = useState<ChatItem[]>([]);
+  // Keep raw history IDs for pagination when an older server still sends results.
+  const chatMsgs = useMemo(() => msgs.filter((item) =>
+    !("type" in item && item.type === "system" && item.subtype === "game-result")
+  ), [msgs]);
   const msgsRef = useRef(msgs);
   msgsRef.current = msgs;
   const [reactions, setReactions] = useState<Map<string, Reaction[]>>(new Map());
@@ -276,8 +281,9 @@ const SocketContextProvider = ({ children }: { children: ReactNode }) => {
       // Drop live messages until the popover is opened and init has been fetched.
       // The init fetch returns the latest 50 user messages anyway, so nothing is lost.
       if (initStatusRef.current !== "loaded") return;
+      const incoming = msgs as ChatItem;
+      if ("type" in incoming && incoming.type === "system" && incoming.subtype === "game-result") return;
       setMsgs((p) => {
-        const incoming = msgs as ChatItem;
         // own echo confirms a pending send: same content first (server may rewrite it), else oldest
         const mine = (m: ChatItem) =>
           !("type" in incoming && incoming.type === "system") &&
@@ -353,7 +359,7 @@ const SocketContextProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <SocketContext.Provider value={{ socket, users, setUsers, msgs, reactions, profileMap, followingId, setFollowingId, hasMoreMessages, loadingHistory, fetchOlderMessages, initStatus, fetchInitialMessages, sendMessage, resendMessage, discardMessage }}>
+    <SocketContext.Provider value={{ socket, users, setUsers, msgs: chatMsgs, reactions, profileMap, followingId, setFollowingId, hasMoreMessages, loadingHistory, fetchOlderMessages, initStatus, fetchInitialMessages, sendMessage, resendMessage, discardMessage }}>
       <CursorStoreContext.Provider value={cursorStore}>{children}</CursorStoreContext.Provider>
     </SocketContext.Provider>
   );
