@@ -1,18 +1,32 @@
+<div align="center">
+
 # 🚀 3D Portfolio
 
-A jaw-dropping developer portfolio packed with interactive 3D animations, buttery smooth transitions, and a space-themed aesthetic. Not your average portfolio template! This one has a fully interactive 3D keyboard where each keycap is a skill.
+**A developer portfolio you can actually play with.** Press keys on a 3D keyboard, watch other visitors' cursors fly by, and chat with whoever's online.
 
-> **Free to use!** This portfolio is open source. If you use it, a credit/link back would be really appreciated 🙏
+### [✨ Live Demo → nareshkhatri.dev](https://nareshkhatri.dev)
+
+[![GitHub stars](https://img.shields.io/github/stars/Naresh-Khatri/3d-portfolio?style=flat&logo=github)](https://github.com/Naresh-Khatri/3d-portfolio/stargazers)
+[![Forks](https://img.shields.io/github/forks/Naresh-Khatri/3d-portfolio?style=flat&logo=github)](https://github.com/Naresh-Khatri/3d-portfolio/network/members)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Next.js 16](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Naresh-Khatri/3d-portfolio)
 
-![Portfolio Preview](https://github.com/Naresh-Khatri/Portfolio/blob/main/public/assets/projects-screenshots/portfolio/landing.png?raw=true)
+<!-- swap for demo video: drag an .mp4 into the GitHub web editor, paste the user-attachments URL on its own line here -->
+![Portfolio Preview](https://github.com/Naresh-Khatri/3d-portfolio/blob/main/public/assets/projects-screenshots/portfolio/landing.png?raw=true)
+
+</div>
+
+> **Free to use!** This portfolio is open source. If you use it, a credit/link back would be really appreciated 🙏
 
 ## ✨ Features
 
-- **Interactive 3D Keyboard** — Programmatically generated Chibi keyboard where each keycap represents a skill, revealing titles and descriptions on hover/press
+- **Interactive 3D Keyboard** — Programmatically generated Chibi keyboard where each keycap represents a skill, revealing titles and descriptions on hover/press. Try colors, logos, and layouts in the [Chibi keycap customizer](https://chibi.nareshkhatri.dev/demo/keycaps).
+- **Live Multiplayer** — See other visitors' cursors in realtime, who's online, and chat with them ([details](#-realtime-features-optional))
 - **Buttery Animations** — GSAP + Framer Motion powered scroll, hover, and reveal animations
 - **Space Theme** — Floating particles on a dark canvas for a cosmic vibe
+- **Easter Eggs** — Open DevTools and follow the clues 🐱
 - **Light & Dark Mode** — Full theme support with cheeky disclaimer toasts
 - **Responsive** — Works across all screen sizes
 - **Contact Form** — Email delivery via Resend
@@ -135,17 +149,18 @@ Other files you'll want to customize:
 
 ---
 
-## ⌨️ Updating the 3D Keyboard Skills
+## ⌨️ Customize the 3D keyboard
 
-The keyboard is generated from `SKILLS` in `src/data/constants.ts`.
-Optional `keyboardIcon`, `keyboardColor`, and `shortcut` fields customize each key.
-Local models and artwork live under `public/assets/keyboard/`. The converted
-Archivo Black font at `public/fonts/helvetiker_regular.typeface.json` renders
-the 3D headings; `src/components/keyboard/heading-metrics.json` positions them.
-Keep the font license alongside the converted font.
+Try colors, logos, and layouts in the [Chibi keycap customizer](https://chibi.nareshkhatri.dev/demo/keycaps), then apply your choices to `SKILLS` in [`src/data/constants.ts`](src/data/constants.ts):
 
-Chibi renders the scene, while Portfolio handles GSAP motion, input, and audio.
-Reduced motion, Data Saver, and scene failures keep the HTML skills grid visible.
+- `keyboardColor`: keycap color, such as `"#ff9408"`.
+- `keyboardIcon`: copy an SVG URL from [thesvg.org](https://thesvg.org) and paste it here. You can also use a local file under `public/assets/keyboard/logos/`.
+- `label` and `shortDescription`: text shown when interacting with a key.
+- `shortcut`: optional physical key code, such as `"KeyQ"`. Keep shortcuts unique; defaults follow QWERTY letter order.
+
+The demo accepts logo names too, but `keyboardIcon` needs an image URL or local asset path. Without keyboard overrides, keys use the skill's `color` and `icon`.
+
+Keys follow the order of `SKILLS`. To change the default six columns, pass a second argument to `createKeyboardScene` in [`keyboard-scene.tsx`](src/components/keyboard/keyboard-scene.tsx). Rows adjust automatically to the skill count.
 
 ---
 
@@ -161,7 +176,7 @@ The portfolio supports optional realtime features powered by a **separate backen
 These features activate automatically when the `NEXT_PUBLIC_WS_URL` environment variable is set. Without it, the portfolio works perfectly fine as a static site — no realtime features, no backend dependency.
 
 > [!NOTE]
-> The backend API is **not open source**. This is intentional! Too many people have cloned the portfolio and claimed they built it from scratch. The realtime server stays private to keep the live experience unique make make it standout.
+> The backend API is **not open source**. This is intentional! Too many people have cloned the portfolio and claimed they built it from scratch. The realtime server stays private to keep the live experience unique and make it stand out.
 
 
 ---
