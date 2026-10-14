@@ -87,7 +87,7 @@ function Preloader({ children, disabled = false }: PreloaderProps) {
     <preloaderContext.Provider
       value={{ isLoading, bypassLoading, loadingPercent }}
     >
-      <AnimatePresence mode="wait">{isLoading && <Loader />}</AnimatePresence>
+      <AnimatePresence mode="wait">{isLoading && <Loader key="preloader-loader" />}</AnimatePresence>
       {children}
     </preloaderContext.Provider>
   );

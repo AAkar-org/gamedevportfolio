@@ -38,11 +38,9 @@ const NyanCat = () => {
 
   return (
     <div className="fixed left-0 top-0 w-screen h-screen overflow-hidden z-[-1]">
-      <AnimatePresence>
-        {divs.length > 0 && (
-          <div className="fixed w-screen flex left-0 top-16">{divs.length}</div>
-        )}
-      </AnimatePresence>
+      {divs.length > 0 && (
+        <div className="fixed w-screen flex left-0 top-16">{divs.length}</div>
+      )}
       {divs &&
         divs.map((div) => (
           <AnimatedDiv

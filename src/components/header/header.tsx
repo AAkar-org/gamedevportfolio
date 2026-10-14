@@ -101,7 +101,7 @@ const Header = ({ loader, githubStars }: HeaderProps) => {
         className={styles.background}
       ></motion.div>
       <AnimatePresence mode="wait">
-        {isActive && <Nav setIsActive={setIsActive} />}
+        {isActive && <Nav key="nav-overlay" setIsActive={setIsActive} />}
       </AnimatePresence>
     </motion.header>
   );

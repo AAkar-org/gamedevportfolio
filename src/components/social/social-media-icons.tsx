@@ -1,7 +1,6 @@
 "use client";
 
-import { useInView } from "motion/react";
-import React, { useRef } from "react";
+import React from "react";
 import { Button } from "../ui/button";
 import { SiGithub, SiInstagram, SiLinkedin, SiX } from "react-icons/si";
 import { config } from "@/data/config";
@@ -31,16 +30,13 @@ const BUTTONS = [
 ];
 
 const SocialMediaButtons = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const show = useInView(ref, { once: true });
   return (
-    <div ref={ref} className="z-10">
-      {show &&
-        BUTTONS.map((button) => (
-          <Link href={button.href} key={button.name} target="_blank">
-            <Button variant={"ghost"}>{button.icon}</Button>
-          </Link>
-        ))}
+    <div className="z-10 flex items-center">
+      {BUTTONS.map((button) => (
+        <Link href={button.href} key={button.name} target="_blank">
+          <Button variant={"ghost"}>{button.icon}</Button>
+        </Link>
+      ))}
     </div>
   );
 };

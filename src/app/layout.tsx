@@ -3,6 +3,16 @@ import { Space_Grotesk, Unbounded } from "next/font/google";
 import "./globals.css";
 import { config } from "@/data/config";
 
+if (process.env.NODE_ENV === "development") {
+  const orig = console.error;
+  console.error = function (...args: unknown[]) {
+    const msg = args.map((a) => (typeof a === "string" ? a : "")).join(" ");
+    if (msg.includes("Encountered a script tag")) return;
+    return orig.apply(console, args);
+  };
+}
+
+import { Suspense } from "react";
 import Script from "next/script";
 import SiteFrame from "@/components/site-frame";
 import GitHubStars from "@/components/header/github-stars";
@@ -74,7 +84,7 @@ export default function RootLayout({
       ].join(" ")}
       suppressHydrationWarning
     >
-      <head>
+      <body>
         {process.env.UMAMI_SITE_ID && (
           <Script
             defer
@@ -82,10 +92,14 @@ export default function RootLayout({
             data-website-id={process.env.UMAMI_SITE_ID}
           />
         )}
-      </head>
-      <body>
         <Providers>
-          <SiteFrame githubStars={<GitHubStars className="mr-4" />}>
+          <SiteFrame
+            githubStars={
+              <Suspense fallback={null}>
+                <GitHubStars className="mr-4" />
+              </Suspense>
+            }
+          >
             {children}
           </SiteFrame>
         </Providers>

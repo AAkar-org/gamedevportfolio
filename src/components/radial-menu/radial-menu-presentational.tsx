@@ -196,6 +196,7 @@ export const RadialMenuPresentational = ({
       <AnimatePresence>
         {isOpen && (
           <div
+            key="radial-menu-overlay"
             className="fixed z-[100]"
             style={{
               left: position.x,
