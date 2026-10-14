@@ -27,8 +27,8 @@ const config = {
   site: "https://nareshkhatri.dev",
 
   // for github stars button
-  githubUsername: "naresh-khatri",
-  githubRepo: "3d-portfolio",
+  githubUsername: "AAkar-org",
+  githubRepo: "gamedevportfolio",
 
   get ogImg() {
     return this.site + "/assets/seo/og-image.png";
@@ -38,7 +38,7 @@ const config = {
     linkedin: "https://www.linkedin.com/in/naresh-khatri/",
     instagram: "https://www.instagram.com/hotchaddi",
     facebook: "https://www.facebook.com/HotChaddi/",
-    github: "https://github.com/Naresh-Khatri",
+    github: "https://github.com/AAkar-org",
   },
 };
 export { config };
