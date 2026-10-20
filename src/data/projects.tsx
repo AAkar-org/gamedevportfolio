@@ -1,62 +1,64 @@
-import AceTernityLogo from "@/components/logos/aceternity";
 import SlideShow from "@/components/slide-show";
 import { Button } from "@/components/ui/button";
 import { TypographyH3, TypographyP } from "@/components/ui/typography";
-import { ArrowUpRight, ExternalLink, Link2, MoveUpRight } from "lucide-react";
-import Image from "next/image";
+import {
+  ArrowUpRight,
+  Brain,
+  Code2,
+  Compass,
+  Cpu,
+  FileText,
+  Gamepad2,
+  GitBranch,
+  Layers,
+  Monitor,
+  Play,
+  Smartphone,
+  Sparkles,
+  Swords,
+  Tv,
+} from "lucide-react";
 import Link from "next/link";
 import { ReactNode } from "react";
+
 const BASE_PATH = "/assets/projects-screenshots";
 
-// Renders a brand SVG from /public as a monochrome glyph that inherits the
-// surrounding text color (the skill dock styles every icon via currentColor),
-// so full-color marks like Mistral flatten to match the rest of the set.
-const MaskIcon = ({ src, title }: { src: string; title?: string }) => (
-  <span
-    role="img"
-    aria-label={title}
-    className="block bg-current"
-    style={{
-      width: "1em",
-      height: "1em",
-      WebkitMaskImage: `url(${src})`,
-      maskImage: `url(${src})`,
-      WebkitMaskRepeat: "no-repeat",
-      maskRepeat: "no-repeat",
-      WebkitMaskPosition: "center",
-      maskPosition: "center",
-      WebkitMaskSize: "contain",
-      maskSize: "contain",
-    }}
-  />
-);
-
-const ProjectsLinks = ({ live, repo }: { live?: string; repo?: string }) => {
+const ProjectsLinks = ({
+  live,
+  repo,
+  label = "Watch Gameplay Video",
+}: {
+  live?: string;
+  repo?: string;
+  label?: string;
+}) => {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-start gap-3 my-3 mb-8">
+    <div className="flex flex-col md:flex-row items-center justify-start gap-3 my-4 mb-6">
       {live && live !== "#" && (
         <Link
-          className="font-mono underline flex gap-2"
-          rel="noopener"
-          target="_new"
+          className="font-mono flex gap-2"
+          rel="noopener noreferrer"
+          target="_blank"
           href={live}
         >
-          <Button variant={"default"} size={"sm"}>
-            Visit Website
-            <ArrowUpRight className="ml-3 w-5 h-5" />
+          <Button variant={"default"} size={"sm"} className="gap-2">
+            <Play className="w-4 h-4 fill-current" />
+            {label}
+            <ArrowUpRight className="w-4 h-4" />
           </Button>
         </Link>
       )}
       {repo && repo !== "#" && (
         <Link
-          className="font-mono underline flex gap-2"
-          rel="noopener"
-          target="_new"
+          className="font-mono flex gap-2"
+          rel="noopener noreferrer"
+          target="_blank"
           href={repo}
         >
-          <Button variant={"default"} size={"sm"}>
-            Github
-            <ArrowUpRight className="ml-3 w-5 h-5" />
+          <Button variant={"outline"} size={"sm"} className="gap-2">
+            <GitBranch className="w-4 h-4" />
+            GitHub Repository
+            <ArrowUpRight className="w-4 h-4" />
           </Button>
         </Link>
       )}
@@ -70,113 +72,34 @@ export type Skill = {
   fg: string;
   icon: ReactNode;
 };
-// Brand chips sourced from thesvg CLI mono SVGs in /public/assets/logos,
-// rendered via MaskIcon so each one inherits the dock's currentColor.
-const brand = (title: string, file: string): Skill => ({
+
+const makeSkill = (title: string, icon: ReactNode): Skill => ({
   title,
   bg: "black",
   fg: "white",
-  icon: <MaskIcon src={`/assets/logos/${file}`} title={title} />,
+  icon,
 });
-const PROJECT_SKILLS = {
-  next: brand("Next.js", "nextdotjs-mono.svg"),
-  chakra: brand("Chakra UI", "chakra-ui-mono.svg"),
-  node: brand("Node.js", "nodedotjs-mono.svg"),
-  python: brand("Python", "python-mono.svg"),
-  prisma: brand("Prisma", "prisma-mono.svg"),
-  postgres: brand("PostgreSQL", "postgresql-mono.svg"),
-  mongo: brand("MongoDB", "mongodb-mono.svg"),
-  express: brand("Express", "express-mono.svg"),
-  reactQuery: brand("React Query", "react-query-mono.svg"),
-  shadcn: brand("shadcn/ui", "shadcn-ui-mono.svg"),
-  // Not in the thesvg registry — keep the existing custom logo.
-  aceternity: {
-    title: "Aceternity",
-    bg: "black",
-    fg: "white",
-    icon: <AceTernityLogo />,
-  },
-  tailwind: brand("Tailwind", "tailwind-css-mono.svg"),
-  docker: brand("Docker", "docker-mono.svg"),
-  // Not in the thesvg registry — keep the text mark.
-  yjs: {
-    title: "Y.js",
-    bg: "black",
-    fg: "white",
-    icon: (
-      <span>
-        <strong>Y</strong>js
-      </span>
-    ),
-  },
-  firebase: brand("Firebase", "firebase-mono.svg"),
-  sockerio: brand("Socket.io", "socketdotio-mono.svg"),
-  js: brand("JavaScript", "javascript-mono.svg"),
-  ts: brand("TypeScript", "typescript-mono.svg"),
-  vue: brand("Vue.js", "vuedotjs-mono.svg"),
-  react: brand("React.js", "react-mono.svg"),
-  sanity: brand("Sanity", "sanity-mono.svg"),
-  gsap: brand("GSAP", "gsap-mono.svg"),
-  motion: brand("Motion", "motion.svg"),
-  supabase: brand("Supabase", "supabase-mono.svg"),
-  trpc: brand("tRPC", "trpc-mono.svg"),
-  drizzle: brand("Drizzle ORM", "drizzle-mono.svg"),
-  hono: brand("Hono", "hono-mono.svg"),
-  redis: brand("Redis / BullMQ", "redis-mono.svg"),
-  cloudflare: brand("Cloudflare", "cloudflare-mono.svg"),
-  // React Native reuses the React mark.
-  reactNative: brand("React Native", "react-mono.svg"),
-  betterAuth: brand("Better Auth", "better-auth-mono.svg"),
-  // Not in the thesvg registry — keep the text marks.
-  zustand: {
-    title: "Zustand",
-    bg: "black",
-    fg: "white",
-    icon: <span className="text-xs font-bold">Zu</span>,
-  },
-  partykit: {
-    title: "PartyKit",
-    bg: "black",
-    fg: "white",
-    icon: <span className="text-base">🎈</span>,
-  },
-  hocuspocus: {
-    title: "Hocuspocus",
-    bg: "black",
-    fg: "white",
-    icon: <span className="text-xs font-bold">Hp</span>,
-  },
-  // React Flow ships under the xyflow brand.
-  reactFlow: brand("React Flow", "xyflow-mono.svg"),
-  codemirror: brand("CodeMirror", "codemirror-mono.svg"),
-  // "Satori / sharp" — uses the sharp mark.
-  satori: brand("Satori / sharp", "sharp-mono.svg"),
-  turborepo: brand("Turborepo", "turborepo-mono.svg"),
-  // Vercel AI SDK uses the Vercel mark.
-  aiSDK: brand("Vercel AI SDK", "vercel-mono.svg"),
-  anthropic: brand("Anthropic Claude", "anthropic-mono.svg"),
-  mistral: brand("Mistral AI", "mistral-ai-mono.svg"),
-  // Not in the thesvg registry — keep the text mark.
-  nextIntl: {
-    title: "next-intl",
-    bg: "black",
-    fg: "white",
-    icon: <span className="text-xs font-bold">i18n</span>,
-  },
-  // Not in the thesvg registry — keep the text marks.
-  expo: {
-    title: "Expo",
-    bg: "black",
-    fg: "white",
-    icon: <span className="text-xs font-bold">Expo</span>,
-  },
-  mcp: {
-    title: "MCP",
-    bg: "black",
-    fg: "white",
-    icon: <span className="text-xs font-bold">MCP</span>,
-  },
+
+export const PROJECT_SKILLS = {
+  unreal: makeSkill("Unreal Engine 5.6", <Gamepad2 className="w-4 h-4" />),
+  unity: makeSkill("Unity (2D & 3D)", <Gamepad2 className="w-4 h-4" />),
+  csharp: makeSkill("C# Programming", <Code2 className="w-4 h-4" />),
+  cpp: makeSkill("C++", <Code2 className="w-4 h-4" />),
+  blueprints: makeSkill("UE Blueprints", <Layers className="w-4 h-4" />),
+  behaviorTrees: makeSkill("Behavior Trees & AI", <Brain className="w-4 h-4" />),
+  navmesh: makeSkill("NavMesh & Waypoints", <Compass className="w-4 h-4" />),
+  gdd: makeSkill("Game Design (GDD)", <FileText className="w-4 h-4" />),
+  ui: makeSkill("Health UI & HUD", <Sparkles className="w-4 h-4" />),
+  combat: makeSkill("Melee Combat Systems", <Swords className="w-4 h-4" />),
+  steam: makeSkill("Steam / PC Platform", <Monitor className="w-4 h-4" />),
+  playstation: makeSkill("PlayStation", <Tv className="w-4 h-4" />),
+  xbox: makeSkill("Xbox", <Gamepad2 className="w-4 h-4" />),
+  mobile: makeSkill("Mobile (Android & iOS)", <Smartphone className="w-4 h-4" />),
+  vr: makeSkill("VR / XR Architecture", <Cpu className="w-4 h-4" />),
+  git: makeSkill("Git / Version Control", <GitBranch className="w-4 h-4" />),
+  physics: makeSkill("Physics & Kinematics", <Compass className="w-4 h-4" />),
 };
+
 export type Project = {
   id: string;
   category: string;
@@ -188,643 +111,351 @@ export type Project = {
   github?: string;
   live: string;
 };
+
 const projects: Project[] = [
   {
-    id: "storekit",
-    category: "Commerce platform",
-    title: "StoreKit",
-    src: "/assets/projects-screenshots/storekit/landing.png",
-    screenshots: ["landing.png"],
+    id: "isla-sentinel",
+    category: "Unreal Engine 5 • Major Project",
+    title: "Surviving the Adventures of Isla Sentinel",
+    src: `${BASE_PATH}/isla-sentinel/thumbnail.jpg`,
+    screenshots: ["env.jpg", "platform.jpg", "patrol.jpg"],
     skills: {
       frontend: [
-        PROJECT_SKILLS.ts,
-        PROJECT_SKILLS.next,
-        PROJECT_SKILLS.react,
-        PROJECT_SKILLS.reactNative,
-        PROJECT_SKILLS.tailwind,
+        PROJECT_SKILLS.unreal,
+        PROJECT_SKILLS.blueprints,
+        PROJECT_SKILLS.cpp,
       ],
       backend: [
-        PROJECT_SKILLS.hono,
-        PROJECT_SKILLS.trpc,
-        PROJECT_SKILLS.drizzle,
-        PROJECT_SKILLS.postgres,
-        PROJECT_SKILLS.redis,
-        PROJECT_SKILLS.betterAuth,
-        PROJECT_SKILLS.cloudflare,
-        PROJECT_SKILLS.docker,
+        PROJECT_SKILLS.behaviorTrees,
+        PROJECT_SKILLS.navmesh,
+        PROJECT_SKILLS.steam,
+        PROJECT_SKILLS.playstation,
       ],
     },
-    live: "https://storekit.app/",
-    // Private repo (commercial product) — intentionally no public source link
+    live: "#",
+    github: "#",
     get content() {
       return (
-        <div>
-          <TypographyP className="font-mono text-2xl text-center">
-            A production-grade, multi-tenant commerce platform — Shopify-class,
-            built solo.
-          </TypographyP>
-          <TypographyP className="font-mono ">
-            Architected and built end-to-end as a single engineer: a
-            pnpm/Turborepo monorepo spanning 6 applications and 11 shared
-            packages — merchant dashboard, customer storefront, headless REST
-            API, and two React Native apps (customer + POS) — with a shared
-            type-safe core (54-table Drizzle/Postgres schema, 33 tRPC v11
-            routers, end-to-end inference). ~238K lines of TypeScript powering 4
-            storefront verticals: e-commerce, food delivery, quick-commerce, and
-            digital goods.
-          </TypographyP>
-          <ProjectsLinks live={this.live} repo={this.github} />
+        <div className="space-y-6">
+          <div className="rounded-xl border border-primary/30 bg-primary/10 p-5 backdrop-blur-sm">
+            <p className="font-mono text-sm uppercase tracking-widest text-primary font-bold">
+              Visionary Flagship Title
+            </p>
+            <h3 className="font-display text-2xl md:text-3xl font-black uppercase text-foreground mt-1">
+              SURVIVING THE ADVENTURES OF ISLA SENTINEL
+            </h3>
+            <p className="font-mono text-sm text-muted-foreground mt-2">
+              This is my upcoming Unreal Engine major project — a high-stakes survival adventure set on the perilous, ancient terrain of Isla Sentinel.
+            </p>
+          </div>
 
-          <TypographyH3 className="my-4 mt-8">Payments &amp; reliability</TypographyH3>
-          <p className="font-mono mb-2">
-            A PhonePe payment integration with OAuth2 token exchange, Redis-cached
-            per-store tokens, and idempotency keys on orders/transactions/refunds
-            so checkout survives refreshes and duplicate webhooks without
-            double-charging. Payment credentials are encrypted at rest and webhook
-            signatures verified to prevent tampering, with a BullMQ/Redis async
-            layer (5 retries, exponential backoff) driving notifications and order
-            jobs — every webhook event logged for replay.
-          </p>
+          <TypographyP className="font-mono leading-relaxed">
+            Architected in Unreal Engine 5, Isla Sentinel blends deep survival mechanics with atmospheric environmental storytelling. Players navigate mystical floating ruins, treacherous abyssal chasms, and ancient mechanical puzzles while managing hunger, stamina, environmental exposure, and territorial enemy ecosystems.
+          </TypographyP>
+
+          <ProjectsLinks live={this.live} repo={this.github} label="Project Overview" />
+
           <SlideShow
             images={[
-              `${BASE_PATH}/storekit/orders.png`,
-              `${BASE_PATH}/storekit/login.png`,
+              `${BASE_PATH}/isla-sentinel/env.jpg`,
+              `${BASE_PATH}/isla-sentinel/platform.jpg`,
+              `${BASE_PATH}/isla-sentinel/patrol.jpg`,
             ]}
           />
 
-          <TypographyH3 className="my-4 mt-8">AI storefront generation</TypographyH3>
-          <p className="font-mono mb-2">
-            <em>In progress.</em> An agentic generator where an LLM writes real
-            storefront code inside isolated container sandboxes, gated by a
-            type-check + lint pass so broken code never lands — then deploys each
-            store programmatically as its own Cloudflare Worker through a
-            queue-driven pipeline, with a fleet health monitor that auto-rolls-back
-            failing deployments within minutes.
-          </p>
-
-          <TypographyH3 className="my-4 mt-8">Domain modeling &amp; breadth</TypographyH3>
-          <p className="font-mono mb-2">
-            An explicit order state-machine spans the 4 verticals with
-            illegal-transition guards, fronted by a typed event bus and a
-            per-store plugin registry for pluggable lifecycle behavior without
-            touching core code. The merchant dashboard ships a visual theme
-            builder, analytics, inventory, coupons, abandoned-cart recovery, and
-            Pixie — an in-product AI agent that manages the store via tool-calling
-            over live data. The POS app does Bluetooth ESC/POS thermal printing,
-            mDNS/TCP printer discovery, and barcode scanning.
-          </p>
-          <SlideShow
-            images={[
-              `${BASE_PATH}/storekit/storefront.png`,
-              `${BASE_PATH}/storekit/themes.png`,
-            ]}
-          />
+          <TypographyH3 className="my-4 mt-8">Core Gameplay Systems</TypographyH3>
+          <ul className="list-disc list-outside ml-6 space-y-2 font-mono text-sm text-muted-foreground">
+            <li>
+              <strong className="text-foreground">Atmospheric World Architecture:</strong> Built with Unreal Engine 5 real-time dynamic global illumination (Lumen) and high-density geometric detail (Nanite).
+            </li>
+            <li>
+              <strong className="text-foreground">Adaptive Adversary AI:</strong> Custom Behavior Trees coordinating patrol routines, dynamic perception cones, and aggressive territory-defense behavior.
+            </li>
+            <li>
+              <strong className="text-foreground">Environmental Puzzles &amp; Traversal:</strong> Ruined stone causeways, glowing rune circles, floating pathways, and physics-driven environmental obstacles.
+            </li>
+            <li>
+              <strong className="text-foreground">Survival Loop:</strong> Resource harvesting, equipment crafting, health progress monitors, and stamina management under extreme conditions.
+            </li>
+          </ul>
         </div>
       );
     },
   },
   {
-    id: "codingducks",
-    category: "Real-time coding platform",
-    title: "Coding Ducks",
-    src: "/assets/projects-screenshots/codingducks/landing.png",
-    screenshots: ["landing.png"],
+    id: "ue-enemy-ai",
+    category: "Unreal Engine 5.6 • AI & Gameplay",
+    title: "Enemy AI Patrolling & Chase System",
+    src: `${BASE_PATH}/ue-enemy-ai/thumbnail.jpg`,
+    screenshots: ["thumbnail.jpg", "env.jpg", "platform.jpg"],
     skills: {
       frontend: [
-        PROJECT_SKILLS.ts,
-        PROJECT_SKILLS.next,
-        PROJECT_SKILLS.react,
-        PROJECT_SKILLS.tailwind,
-        PROJECT_SKILLS.codemirror,
-        PROJECT_SKILLS.reactFlow,
+        PROJECT_SKILLS.unreal,
+        PROJECT_SKILLS.blueprints,
+        PROJECT_SKILLS.cpp,
       ],
       backend: [
-        PROJECT_SKILLS.node,
-        PROJECT_SKILLS.trpc,
-        PROJECT_SKILLS.drizzle,
-        PROJECT_SKILLS.postgres,
-        PROJECT_SKILLS.yjs,
-        PROJECT_SKILLS.hocuspocus,
-        PROJECT_SKILLS.betterAuth,
-        PROJECT_SKILLS.docker,
+        PROJECT_SKILLS.behaviorTrees,
+        PROJECT_SKILLS.navmesh,
+        PROJECT_SKILLS.physics,
       ],
     },
-    live: "https://www.codingducks.xyz/",
-    github: "https://github.com/Naresh-Khatri/Coding-Ducks",
+    live: "https://youtu.be/AARc-Z0MURY",
+    github: "#",
     get content() {
       return (
-        <div>
-          <TypographyP className="font-mono text-2xl text-center">
-            A multi-language judge, a CRDT collaborative editor, and a
-            system-design simulation game — in one platform.
+        <div className="space-y-6">
+          <TypographyP className="font-mono text-xl font-bold">
+            Autonomous Enemy AI with Cyclic Patrolling and Player Detection in Unreal Engine 5.6
           </TypographyP>
-          <TypographyP className="font-mono ">
-            Coding Ducks is a full-stack, real-time coding platform built as a
-            production-grade Turborepo monorepo (2 apps, 7 shared packages) in
-            strict TypeScript — Next.js 16 / React 19, a tRPC v11 type-safe API,
-            PostgreSQL + Drizzle ORM (18 tables), and a standalone real-time
-            Node service, with enforced one-way apps → packages dependency
-            boundaries.
+          <TypographyP className="font-mono leading-relaxed">
+            Engineered an autonomous enemy AI system in Unreal Engine 5.6 utilizing Blueprints, Behavior Trees, and custom AI Controllers. The system drives intelligent NPC behaviors that dynamically alternate between patrol routines, suspicion checks, and full pursuit based on player proximity and sight perception.
           </TypographyP>
-          <ProjectsLinks live={this.live} repo={this.github} />
 
-          <TypographyH3 className="my-4 mt-8">
-            Ducklets — real-time collaborative editor
-          </TypographyH3>
-          <p className="font-mono mb-2">
-            A multiplayer code editor built on Y.js CRDTs and a standalone
-            Hocuspocus WebSocket server — concurrent editing, live cursor
-            presence, and conflict-free merging persisted to Postgres as
-            versioned binary state. Secured by a custom HMAC-SHA256 signed-token
-            scheme (constant-time verification, 1-hour TTL) with owner / editor
-            / viewer RBAC re-verified live against the DB so permission
-            revocation takes effect mid-session. Includes room forking,
-            point-in-time snapshots, idempotent chat, and throttled live
-            previews (Puppeteer + Cloudflare R2, coalesced to ≤1 render/60s).
-          </p>
+          <ProjectsLinks live={this.live} repo={this.github} label="Watch Gameplay Demonstration" />
+
+          {/* Embedded YouTube Showcase */}
+          <div className="relative aspect-video w-full rounded-xl overflow-hidden border border-border my-6 shadow-md bg-black">
+            <iframe
+              src="https://www.youtube.com/embed/AARc-Z0MURY"
+              title="Enemy AI Patrolling and Enemy-Player Chase System in Unreal Engine"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            />
+          </div>
+
           <SlideShow
             images={[
-              `${BASE_PATH}/codingducks/ducklets-editor.png`,
-              `${BASE_PATH}/codingducks/ducklets.png`,
+              `${BASE_PATH}/ue-enemy-ai/thumbnail.jpg`,
+              `${BASE_PATH}/ue-enemy-ai/env.jpg`,
+              `${BASE_PATH}/ue-enemy-ai/platform.jpg`,
             ]}
           />
 
-          <TypographyH3 className="my-4 mt-8">
-            CD Judge — in-house code execution engine
-          </TypographyH3>
-          <p className="font-mono mb-2">
-            A free, self-hostable, Judge0-class execution engine supporting 10
-            languages (Python, JS, TS, Java, C, C++, Rust, Go, Ruby, PHP) with per-language
-            driver/harness generation that injects test cases, parses typed
-            arguments, and redacts hidden-test output. An asynchronous submit →
-            poll → verdict pipeline uses an optimistic-locking finalizer
-            (UPDATE … WHERE status=&apos;running&apos;) to guarantee exactly-once
-            streak/scoring under concurrent polling, plus &quot;beats X%&quot;
-            runtime-percentile ranking via SQL window aggregates.
-          </p>
-          <SlideShow
-            images={[
-              `${BASE_PATH}/codingducks/problems.png`,
-              `${BASE_PATH}/codingducks/problem.png`,
-              `${BASE_PATH}/codingducks/machine-coding.png`,
-            ]}
-          />
-
-          <TypographyH3 className="my-4 mt-8">
-            System Design — simulation game
-          </TypographyH3>
-          <p className="font-mono mb-2">
-            An interactive puzzle game where users assemble architectures from
-            16 typed building blocks on a React Flow canvas, then run them
-            through a pure-TypeScript, client-side traffic-simulation engine —
-            topological propagation, capacity/latency modeling, cache-warmth
-            EMA, SPOF detection, and DDoS &amp; chaos-fault injection. A 3-star
-            scoring model across reliability / performance / efficiency spans 10
-            progressively harder levels, guarded by a calibration suite
-            (node&nbsp;--test) that runs reference designs 15× through the real
-            engine to assert each level stays beatable-but-hard (optimal ⇒ 3★,
-            naive ⇒ ≤2★, broken ⇒ fail).
-          </p>
-          <SlideShow images={[`${BASE_PATH}/codingducks/sysdesign.png`]} />
+          <TypographyH3 className="my-4 mt-8">Technical Implementation</TypographyH3>
+          <ul className="list-disc list-outside ml-6 space-y-2 font-mono text-sm text-muted-foreground">
+            <li>
+              <strong className="text-foreground">Cyclic NPC Patrolling:</strong> Implemented sequential and loop patrol point traversal using NavMesh bounds with visual waypoint nodes (colored waypoint markers).
+            </li>
+            <li>
+              <strong className="text-foreground">Player Detection &amp; Chase Radius:</strong> Configured AI perception cones and radial triggers that detect player movement and trigger state transitions.
+            </li>
+            <li>
+              <strong className="text-foreground">Blackboard &amp; Behavior Tree Tasks:</strong> Synchronized target vectors, speed modifiers, and search states across Blackboard keys and decorator logic.
+            </li>
+            <li>
+              <strong className="text-foreground">Role:</strong> Developer and Tester — responsible for complete architecture, debugging, collision bounds, and movement smoothing.
+            </li>
+          </ul>
         </div>
       );
     },
   },
   {
-    id: "gumbalup",
-    category: "Real-time quiz platform",
-    title: "Gumbalup",
-    src: "/assets/projects-screenshots/gumbalup/landing.png",
-    screenshots: ["landing.png"],
+    id: "ue-survival",
+    category: "Unreal Engine 5.6 • Combat & Mechanics",
+    title: "Survival Game Prototype",
+    src: `${BASE_PATH}/ue-survival/thumbnail.jpg`,
+    screenshots: ["thumbnail.jpg", "combat.jpg", "locomotion.jpg", "hud.jpg"],
     skills: {
       frontend: [
-        PROJECT_SKILLS.ts,
-        PROJECT_SKILLS.next,
-        PROJECT_SKILLS.react,
-        PROJECT_SKILLS.tailwind,
-        PROJECT_SKILLS.motion,
+        PROJECT_SKILLS.unreal,
+        PROJECT_SKILLS.blueprints,
       ],
       backend: [
-        PROJECT_SKILLS.trpc,
-        PROJECT_SKILLS.partykit,
-        PROJECT_SKILLS.drizzle,
-        PROJECT_SKILLS.postgres,
-        PROJECT_SKILLS.betterAuth,
-        PROJECT_SKILLS.cloudflare,
-        PROJECT_SKILLS.docker,
+        PROJECT_SKILLS.combat,
+        PROJECT_SKILLS.ui,
+        PROJECT_SKILLS.physics,
       ],
     },
-    live: "https://gumbalup.com/",
-    // Private repo (commercial product) — intentionally no public source link
+    live: "https://youtu.be/gvm_I5BbXRM",
+    github: "#",
     get content() {
       return (
-        <div>
-          <TypographyP className="font-mono text-2xl text-center">
-            A live, interactive quiz &amp; audience-engagement platform — built
-            solo, end-to-end.
+        <div className="space-y-6">
+          <TypographyP className="font-mono text-xl font-bold">
+            Third-Person Survival Adventure with Enemy Chase &amp; Axe Attack Combat
           </TypographyP>
-          <TypographyP className="font-mono ">
-            A production-grade, multi-tenant SaaS where organizations build
-            quizzes (manually or with AI) and run live, host-driven games —
-            players join from any device via room code / QR and compete on a
-            real-time, server-authoritative leaderboard. Also supports async
-            self-paced quizzes, team mode, anti-cheat monitoring, analytics,
-            billing, and white-labeling. ~43.5K lines of TypeScript across 257
-            files.
+          <TypographyP className="font-mono leading-relaxed">
+            Developed a comprehensive Survival Adventure game prototype in Unreal Engine 5.6. Built third-person locomotion, aggressive enemy pursuit AI with melee axe attacks, and an interactive player health system with real-time UI progress feedback.
           </TypographyP>
-          <ProjectsLinks live={this.live} repo={this.github} />
 
-          <TypographyH3 className="my-4 mt-8">
-            Server-authoritative game engine
-          </TypographyH3>
-          <p className="font-mono mb-2">
-            A real-time game engine on PartyKit (Cloudflare Durable Objects +
-            WebSockets): a per-room in-memory state machine with an authoritative
-            1-second timer, speed-rank + streak scoring, deterministic
-            tie-broken leaderboards, team mode, and graceful reconnect/replay —
-            ~2,800 lines of game logic behind a typed message protocol (42
-            discriminated-union variants). Correctness is never sent to clients
-            during an active question, so players can&apos;t sniff answers or
-            game the clock.
-          </p>
-          <SlideShow images={[`${BASE_PATH}/gumbalup/dashboard.png`]} />
+          <ProjectsLinks live={this.live} repo={this.github} label="Watch on YouTube" />
 
-          <TypographyH3 className="my-4 mt-8">
-            Edge-to-DB security boundary &amp; AI authoring
-          </TypographyH3>
-          <p className="font-mono mb-2">
-            The edge worker never connects to Postgres directly — it proxies all
-            persistence through a shared-secret internal HTTPS API on Next.js,
-            keeping the database unreachable from the public internet while the
-            worker stays stateless and edge-deployed. A fully type-safe layer (17
-            tRPC routers, 5 authorization tiers, Zod) backs it, with LLM-powered
-            quiz authoring (Groq / Llama) from topics or uploaded PDFs, quota-
-            metered per org, plus analytics with CSV/Excel/PDF export.
-          </p>
+          {/* Compressed Complete Gameplay Video Capture */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-mono font-bold text-foreground flex items-center gap-2">
+                <Play className="w-3.5 h-3.5 text-primary fill-current" />
+                Complete Gameplay: Enemy Pursuit &amp; Axe Combat
+              </span>
+              <span className="text-[10px] font-mono text-muted-foreground border border-border px-2 py-0.5 rounded">
+                1080p • 30 FPS • 0:30
+              </span>
+            </div>
+            <div className="relative aspect-video w-full rounded-xl overflow-hidden border border-border shadow-lg bg-black">
+              <video
+                controls
+                playsInline
+                preload="metadata"
+                poster={`${BASE_PATH}/ue-survival/thumbnail.jpg`}
+                className="w-full h-full object-contain"
+              >
+                <source
+                  src={`${BASE_PATH}/ue-survival/gameplay.mp4`}
+                  type="video/mp4"
+                />
+                Your browser does not support HTML5 video.
+              </video>
+            </div>
+          </div>
+
+          {/* Compressed Prototype Intro Video */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-mono font-bold text-foreground flex items-center gap-2">
+                <Play className="w-3.5 h-3.5 text-primary fill-current" />
+                Intro Showcase: Survival Adventure Game Prototype
+              </span>
+              <span className="text-[10px] font-mono text-muted-foreground border border-border px-2 py-0.5 rounded">
+                1080p • 24 FPS • 0:10
+              </span>
+            </div>
+            <div className="relative aspect-video w-full rounded-xl overflow-hidden border border-border shadow-lg bg-black">
+              <video
+                controls
+                playsInline
+                preload="metadata"
+                poster={`${BASE_PATH}/ue-survival/combat.jpg`}
+                className="w-full h-full object-contain"
+              >
+                <source
+                  src={`${BASE_PATH}/ue-survival/intro.mp4`}
+                  type="video/mp4"
+                />
+                Your browser does not support HTML5 video.
+              </video>
+            </div>
+          </div>
+
           <SlideShow
             images={[
-              `${BASE_PATH}/gumbalup/editor.png`,
-              `${BASE_PATH}/gumbalup/library.png`,
+              `${BASE_PATH}/ue-survival/thumbnail.jpg`,
+              `${BASE_PATH}/ue-survival/combat.jpg`,
+              `${BASE_PATH}/ue-survival/locomotion.jpg`,
+              `${BASE_PATH}/ue-survival/hud.jpg`,
             ]}
           />
+
+          <TypographyH3 className="my-4 mt-8">Gameplay &amp; Systems Architecture</TypographyH3>
+          <ul className="list-disc list-outside ml-6 space-y-2 font-mono text-sm text-muted-foreground">
+            <li>
+              <strong className="text-foreground">Enemy Melee Combat:</strong> Engineered enemy chase mechanics and axe-based attack animations with weapon collision trace detection.
+            </li>
+            <li>
+              <strong className="text-foreground">Health System &amp; UI Progress Bar:</strong> Designed real-time player health data models connected to a dynamic UMG HUD health bar with damage flash indicators.
+            </li>
+            <li>
+              <strong className="text-foreground">Locomotion &amp; Collision:</strong> Integrated third-person character movement, obstacle navigation, hit reaction montages, and stamina cost algorithms.
+            </li>
+            <li>
+              <strong className="text-foreground">Role:</strong> Developer and Tester — developed core mechanics, combat balancing, and user interface from prototype to playable demo.
+            </li>
+          </ul>
         </div>
       );
     },
   },
   {
-    id: "waku",
-    category: "Image rendering platform",
-    title: "Waku",
-    src: "/assets/projects-screenshots/waku/landing.png",
-    screenshots: ["landing.png"],
+    id: "unity-platformer",
+    category: "Unity • 2D Platformer",
+    title: "2D Platformer Game Designer and Tester",
+    src: `${BASE_PATH}/unity-platformer/thumbnail.jpg`,
+    screenshots: ["grappling.jpg", "platforming.jpg", "acid-traversal.jpg"],
     skills: {
       frontend: [
-        PROJECT_SKILLS.ts,
-        PROJECT_SKILLS.next,
-        PROJECT_SKILLS.react,
-        PROJECT_SKILLS.tailwind,
+        PROJECT_SKILLS.unity,
+        PROJECT_SKILLS.csharp,
       ],
       backend: [
-        PROJECT_SKILLS.trpc,
-        PROJECT_SKILLS.drizzle,
-        PROJECT_SKILLS.postgres,
-        PROJECT_SKILLS.satori,
-        PROJECT_SKILLS.betterAuth,
-        PROJECT_SKILLS.cloudflare,
-        PROJECT_SKILLS.turborepo,
-        PROJECT_SKILLS.docker,
+        PROJECT_SKILLS.gdd,
+        PROJECT_SKILLS.physics,
+        PROJECT_SKILLS.git,
       ],
     },
-    live: "https://waku.nareshkhatri.dev",
-    github: "https://github.com/Naresh-Khatri/waku",
+    live: "https://youtu.be/xt8RpL5wDYg",
+    github: "#",
     get content() {
       return (
-        <div>
-          <TypographyP className="font-mono text-2xl text-center">
-            An on-demand dynamic image-generation service — &quot;design once,
-            ship a typed URL endpoint.&quot;
+        <div className="space-y-6">
+          <TypographyP className="font-mono text-xl font-bold">
+            High-Precision 2D Platformer with GDD-Driven Mechanics &amp; Cross-Team Testing
           </TypographyP>
-          <TypographyP className="font-mono ">
-            Design a template once in a Canva-like editor, then get a typed URL
-            that renders images with live, dynamic data on demand (currently
-            focused on OG images). Built as a 7-package Turborepo monorepo
-            (Next.js 15 / React 19 / TypeScript) — a visual editor, an edge render
-            service, a 3-stage rendering engine, typed SDKs, and shared DB/font
-            packages. 25K+ LOC, MIT-licensed and self-hostable via
-            docker-compose.
+          <TypographyP className="font-mono leading-relaxed">
+            Designed and tested an engaging 2D Platformer game in Unity. Authored Game Design Documentations (GDD) to establish core jump arcs, physics damping, hazard timings, and level progression curves, then implemented and verified each mechanic in C#.
           </TypographyP>
-          <ProjectsLinks live={this.live} repo={this.github} />
 
-          <TypographyH3 className="my-4 mt-8">
-            Deterministic render pipeline &amp; URL contract
-          </TypographyH3>
-          <p className="font-mono mb-2">
-            A deterministic pipeline (TemplateDocument → Satori → Resvg → sharp)
-            compiles a flat node IR to SVG and rasterizes to PNG/WebP/JPEG with
-            HTTP Accept-based format negotiation, dynamic font subsetting from a
-            CDN (25 families, Latin unicode-range parsing), and retina-aware
-            transcoding — served behind an immutable Cache-Control: max-age=1y URL
-            contract. Query params are sorted before encoding so any input order
-            maps to one cache key; versioned URLs are immutable while published
-            URLs 302-redirect to a numbered version, so edits never break
-            previously-shared links.
-          </p>
-          <SlideShow images={[`${BASE_PATH}/waku/preview.png`]} />
+          <ProjectsLinks live={this.live} repo={this.github} label="Watch on YouTube" />
 
-          <TypographyH3 className="my-4 mt-8">
-            Canva-like editor &amp; AI template generation
-          </TypographyH3>
-          <p className="font-mono mb-2">
-            A visual editor built from scratch (no Figma/tldraw/Fabric) on raw
-            pointer events + a Zustand store: edge/center snap guides,
-            scroll-anchored + pinch zoom (5%–800%), a 100-entry coalesced
-            undo/redo stack, and a parameter-binding system that turns any field
-            into a typed URL param. An AI agent generates full templates from a
-            prompt, validated against a Zod document schema. The public image
-            proxy is also SSRF-hardened (private-IP/CIDR blocking, redirect
-            re-validation, streaming size caps, and per-user/IP rate limiting).
-          </p>
+          {/* Compressed In-Engine Gameplay Recording */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-mono font-bold text-foreground flex items-center gap-2">
+                <Play className="w-3.5 h-3.5 text-primary fill-current" />
+                Raw Gameplay Capture: Grapple Locomotion &amp; Traversal
+              </span>
+              <span className="text-[10px] font-mono text-muted-foreground border border-border px-2 py-0.5 rounded">
+                60 FPS • 1920x1200
+              </span>
+            </div>
+            <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-border shadow-lg bg-black">
+              <video
+                controls
+                playsInline
+                preload="metadata"
+                poster={`${BASE_PATH}/unity-platformer/grappling.jpg`}
+                className="w-full h-full object-contain"
+              >
+                <source
+                  src={`${BASE_PATH}/unity-platformer/gameplay.mp4`}
+                  type="video/mp4"
+                />
+                Your browser does not support HTML5 video.
+              </video>
+            </div>
+          </div>
+
           <SlideShow
             images={[
-              `${BASE_PATH}/waku/editor.png`,
-              `${BASE_PATH}/waku/ai.png`,
-            ]}
-          />
-        </div>
-      );
-    },
-  },
-  {
-    id: "peakposts",
-    category: "AI social SaaS",
-    title: "PeakPosts",
-    src: "/assets/projects-screenshots/peakposts/landing.png",
-    screenshots: ["landing.png"],
-    skills: {
-      frontend: [
-        PROJECT_SKILLS.ts,
-        PROJECT_SKILLS.next,
-        PROJECT_SKILLS.react,
-        PROJECT_SKILLS.tailwind,
-        PROJECT_SKILLS.motion,
-        PROJECT_SKILLS.nextIntl,
-      ],
-      backend: [
-        PROJECT_SKILLS.trpc,
-        PROJECT_SKILLS.drizzle,
-        PROJECT_SKILLS.postgres,
-        PROJECT_SKILLS.betterAuth,
-        PROJECT_SKILLS.aiSDK,
-        PROJECT_SKILLS.anthropic,
-        PROJECT_SKILLS.mistral,
-        PROJECT_SKILLS.cloudflare,
-      ],
-    },
-    // Private repo (commercial product) — intentionally no public source link
-    live: "https://peakposts.ai/",
-    get content() {
-      return (
-        <div>
-          <TypographyP className="font-mono text-2xl text-center">
-            A multi-tenant SaaS that turns QR-scanned diner reviews into
-            AI-generated, multi-language social posts — built solo, end-to-end.
-          </TypographyP>
-          <TypographyP className="font-mono ">
-            A production-grade, multi-tenant SaaS (~50K lines of TypeScript) on
-            the Next.js 15 App Router with end-to-end type safety from PostgreSQL
-            → Drizzle ORM → tRPC v11 → React, serving five distinct audiences —
-            diners, brand owners, counter staff, platform admins, and public
-            marketing — from a single application. 208 React components, 14 tRPC
-            routers, a normalized 19-table schema, and 5 AI subsystems across 5
-            languages.
-          </TypographyP>
-          <ProjectsLinks live={this.live} repo={this.github} />
-
-          <TypographyH3 className="my-4 mt-8">
-            Peakie — agentic AI analytics assistant
-          </TypographyH3>
-          <p className="font-mono mb-2">
-            A hand-rolled tool-calling loop on the Vercel AI SDK (Mistral) over 10
-            brand-scoped tools — no agent framework — hardened against
-            small-model failure modes: spin-detection, hallucinated-tool-name
-            repair, per-tool and total over-fetch caps, exact-call de-duplication,
-            a token-budget history trimmer, and forced tool-choice on the final
-            step to guarantee termination within 6 steps. A terminal{" "}
-            <code>present_actions</code> tool forces structured, deep-linkable
-            answers, and every AI-produced link is re-validated against the
-            user&apos;s accessible scope so a hallucinated or out-of-scope
-            resource ID can never leak across tenant boundaries.
-          </p>
-          <SlideShow images={[`${BASE_PATH}/peakposts/dashboard.png`]} />
-
-          <TypographyH3 className="my-4 mt-8">
-            AI content-generation pipeline
-          </TypographyH3>
-          <p className="font-mono mb-2">
-            An Anthropic Claude pipeline converts a star rating + photo + note
-            into platform-tailored social captions across 6 platforms and 5
-            languages using Zod-schema-enforced structured output, brand-voice
-            configuration, content moderation, and deterministic fallbacks so
-            generation never hard-fails. The diner&apos;s locale does double duty
-            — selecting both the UI catalog and the language the AI writes in
-            (e.g. picking Chinese yields a Xiaohongshu-style caption). A
-            retrieval-augmented help center pairs Mistral embeddings + cosine
-            similarity with a weighted-TF lexical fallback for API outages.
-          </p>
-          <SlideShow images={[`${BASE_PATH}/peakposts/posts.png`]} />
-
-          <TypographyH3 className="my-4 mt-8">
-            In-browser video editor &amp; multi-tenant security
-          </TypographyH3>
-          <p className="font-mono mb-2">
-            Diners generate H.264 MP4 video and images entirely client-side via
-            the WebCodecs <code>VideoEncoder</code> + mp4-muxer and Canvas 2D,
-            inside a direct-manipulation post editor (pinch/rotate/drag gestures,
-            caption presets, CJK font subsetting) — zero server-side render cost.
-            The multi-step diner flow persists to IndexedDB via a custom Zustand
-            adapter, with client-side image compression and presigned
-            direct-to-R2 uploads. Underneath sits a five-tier tRPC authorization
-            layer with brand- vs. outlet-scoped grants, existence-masking
-            (<code>NOT_FOUND</code> over <code>FORBIDDEN</code>), and two-factor
-            counter auth — a hashed device token plus per-staff PIN with
-            brute-force lockout.
-          </p>
-        </div>
-      );
-    },
-  },
-  {
-    id: "kanbi",
-    category: "Realtime project tracker",
-    title: "Kanbi",
-    src: "/assets/projects-screenshots/kanbi/landing.png",
-    screenshots: ["landing.png"],
-    skills: {
-      frontend: [
-        PROJECT_SKILLS.ts,
-        PROJECT_SKILLS.next,
-        PROJECT_SKILLS.react,
-        PROJECT_SKILLS.reactNative,
-        PROJECT_SKILLS.expo,
-        PROJECT_SKILLS.tailwind,
-      ],
-      backend: [
-        PROJECT_SKILLS.trpc,
-        PROJECT_SKILLS.drizzle,
-        PROJECT_SKILLS.postgres,
-        PROJECT_SKILLS.betterAuth,
-        PROJECT_SKILLS.mcp,
-        PROJECT_SKILLS.cloudflare,
-        PROJECT_SKILLS.turborepo,
-        PROJECT_SKILLS.docker,
-      ],
-    },
-    live: "https://kanbi.nareshkhatri.dev",
-    github: "https://github.com/naresh-Khatri/kanbi",
-    get content() {
-      return (
-        <div>
-          <TypographyP className="font-mono text-2xl text-center">
-            A keyboard-first, realtime Kanban tracker — &quot;Linear, but small
-            enough to own.&quot;
-          </TypographyP>
-          <TypographyP className="font-mono ">
-            A full-stack TypeScript monorepo (pnpm + Turborepo) spanning three
-            deployable surfaces — a Next.js 15 web app, an OAuth-secured MCP
-            server for AI agents, and an Expo mobile companion — with end-to-end
-            type safety from Postgres → Drizzle → tRPC v11 → React, so a schema
-            change ripples to compile errors in the UI with zero codegen. ~21K
-            lines of TypeScript, 16 domain tRPC routers, a 25-table schema, and 8
-            scoped MCP agent tools.
-          </TypographyP>
-          <ProjectsLinks live={this.live} repo={this.github} />
-
-          <TypographyH3 className="my-4 mt-8">
-            Realtime collaboration &amp; fractional ordering
-          </TypographyH3>
-          <p className="font-mono mb-2">
-            Drag-and-drop boards with optimistic UI and live multi-user updates,
-            powered by tRPC subscriptions over Server-Sent Events. An in-process
-            event bus broadcasts <code>boardId</code>-scoped invalidation signals
-            that carry <em>no payload</em> — clients simply refetch through React
-            Query, keeping the realtime layer cheap and consistent. Mutations
-            snapshot-and-rollback (<code>onMutate</code>/<code>onError</code>/
-            <code>onSettled</code>) and deletes are undoable (6-second deferred
-            server call + toast). Columns and cards order via fractional indexing
-            — new items insert at the midpoint between neighbors, so a reorder
-            touches one row instead of re-sequencing the whole list, with collapse
-            detection and rebalancing.
-          </p>
-          <SlideShow
-            images={[
-              `${BASE_PATH}/kanbi/board.png`,
-              `${BASE_PATH}/kanbi/dashboard.png`,
+              `${BASE_PATH}/unity-platformer/grappling.jpg`,
+              `${BASE_PATH}/unity-platformer/platforming.jpg`,
+              `${BASE_PATH}/unity-platformer/acid-traversal.jpg`,
             ]}
           />
 
-          <TypographyH3 className="my-4 mt-8">
-            One auth model, three clients &amp; an MCP server for AI agents
-          </TypographyH3>
-          <p className="font-mono mb-2">
-            A layered, type-safe authorization model encodes access control at the
-            procedure level — <code>protectedProcedure</code> →{" "}
-            <code>projectProcedure</code> → <code>boardProcedure</code> →{" "}
-            <code>publicBoardProcedure</code> (share token, no auth) — with role
-            checks gating every mutation. The same model is reused across three
-            entry points so ACLs can&apos;t drift: browser cookies, hashed
-            per-device bearer tokens for mobile (SHA-256 at rest), and OAuth-2.1
-            JWTs for AI agents. The spec-compliant MCP server (Streamable HTTP)
-            exposes 8 read/write tools through a full OAuth 2.1 flow — dynamic
-            client registration, a consent screen, JWKS-verified JWTs — each tool a
-            thin wrapper over the existing tRPC procedures via a JWT→session
-            bridge, so permissions, validation, ordering, and the realtime bus are
-            all reused; agent-authored HTML is server-side sanitized.
-          </p>
-          <SlideShow images={[`${BASE_PATH}/kanbi/profile.png`]} />
-
-          <TypographyH3 className="my-4 mt-8">
-            Native Android dock dashboard &amp; AI task drafting
-          </TypographyH3>
-          <p className="font-mono mb-2">
-            A custom native Android Expo module written in Kotlin implements
-            Android&apos;s <code>DreamService</code> (the system daydream): dock
-            the phone and the OS launches a React Native root view rendering the
-            active task and a Pomodoro timer — a genuine focus dashboard, with{" "}
-            <code>showWhenLocked</code>, screen-on, and keyguard dismissal handled
-            natively. Devices pair by QR with secure token storage
-            (<code>expo-secure-store</code>). On the web, paste a raw client
-            message and a Groq-backed LLM extracts structured, actionable issues
-            (title, description, label, priority); rich-text descriptions use Tiptap
-            with <code>@mention</code> and <code>#ticket</code> cross-reference
-            extensions.
-          </p>
-          <SlideShow images={[`${BASE_PATH}/kanbi/ai-draft.png`]} />
-        </div>
-      );
-    },
-  },
-  {
-    id: "portfolio",
-    category: "Portfolio",
-    title: "My Portfolio",
-    src: "/assets/projects-screenshots/portfolio/landing.png",
-    screenshots: ["1.png"],
-    live: "https://nareshkhatri.dev",
-    github: "https://github.com/Naresh-Khatri/Portfolio",
-    skills: {
-      frontend: [
-        PROJECT_SKILLS.ts,
-        PROJECT_SKILLS.next,
-        PROJECT_SKILLS.tailwind,
-        PROJECT_SKILLS.motion,
-      ],
-      backend: [],
-    },
-    get content() {
-      return (
-        <div>
-          <TypographyP className="font-mono ">
-            Welcome to my digital playground, where creativity meets code in the
-            dopest way possible.
-          </TypographyP>
-          <ProjectsLinks live={this.live} repo={this.github} />
-          <TypographyH3 className="my-4 mt-8">
-            Beautiful 3D Objects{" "}
-          </TypographyH3>
-          <p className="font-mono mb-2">
-            Did you see that 3D keyboard modal? Yeah! I made that. That
-            interactive keyboard is being rendered in 3D on a webpage 🤯, and
-            pressing each keycap reveals a skill in a goofy way. It&apos;s like
-            typing, but make it art.
-          </p>
-          <SlideShow
-            images={[
-              `${BASE_PATH}/portfolio/landing.png`,
-              `${BASE_PATH}/portfolio/skills.png`,
-            ]}
-          />
-          <TypographyH3 className="my-4 ">Space Theme</TypographyH3>
-          <p className="font-mono mb-2">
-            Dark background + floating particles = out-of-this-world cool.
-          </p>
-          <SlideShow images={[`${BASE_PATH}/portfolio/navbar.png`]} />
-          <TypographyH3 className="my-4 mt-8">Projects</TypographyH3>
-
-          <p className="font-mono mb-2">
-            My top personal and freelance projects — no filler, all killer.
-          </p>
-          <SlideShow
-            images={[
-              `${BASE_PATH}/portfolio/projects.png`,
-              `${BASE_PATH}/portfolio/project.png`,
-            ]}
-          />
-          <p className="font-mono mb-2 mt-8 text-center">
-            This site&apos;s not just a portfolio — it&apos;s a whole vibe.
-          </p>
+          <TypographyH3 className="my-4 mt-8">Design &amp; Testing Highlights</TypographyH3>
+          <ul className="list-disc list-outside ml-6 space-y-2 font-mono text-sm text-muted-foreground">
+            <li>
+              <strong className="text-foreground">GDD-Led Mechanics:</strong> Authored detailed Game Design Documents specifying jump apex, coyote time, jump buffering, and responsive platform locomotion.
+            </li>
+            <li>
+              <strong className="text-foreground">Grappling &amp; Traversal Physics:</strong> Engineered dynamic tether mechanics allowing players to latch onto crystal anchors and launch across hazardous chasms.
+            </li>
+            <li>
+              <strong className="text-foreground">System Testing &amp; Bug Fixing:</strong> Tested and debugged edge-case collision behaviors, moving platforms, and collectible detection to ensure smooth 60 FPS gameplay.
+            </li>
+            <li>
+              <strong className="text-foreground">Cross-Disciplinary Collaboration:</strong> Partnered with concept artists, sprite animators, and sound designers to implement audio triggers and visual polish.
+            </li>
+            <li>
+              <strong className="text-foreground">Role:</strong> Game Designer and Tester — gameplay mechanics design, playtesting feedback loops, and quality assurance.
+            </li>
+          </ul>
         </div>
       );
     },
   },
 ];
+
 export default projects;

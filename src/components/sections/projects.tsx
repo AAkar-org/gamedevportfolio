@@ -55,7 +55,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
             />
             <div className="absolute w-full h-24 bottom-0 left-0 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-10">
               <div className="flex flex-col h-full items-start justify-end p-4">
-                <div className="text-lg text-left [text-shadow:0_1px_4px_rgba(0,0,0,0.6)]">
+                <div className="text-lg text-left font-bold text-foreground">
                   {project.title}
                 </div>
                 <div className="text-xs bg-primary text-primary-foreground rounded-lg w-fit px-2">
@@ -91,7 +91,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
                 {project.live && project.live !== "#" && (
                   <Link href={project.live} target="_blank">
                     <button className="group flex items-center gap-2 bg-primary text-primary-foreground text-sm font-medium px-4 py-1.5 rounded-full hover:bg-primary/80 transition-colors">
-                      Visit
+                      {project.live.includes("youtu") ? "Watch Video" : "Visit"}
                       <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </button>
                   </Link>
@@ -113,7 +113,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
                 {project.skills.frontend?.length > 0 && (
                   <div className="flex flex-col items-center md:items-start gap-2">
                     <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-medium">
-                      Frontend
+                      Engine &amp; Core
                     </span>
                     <FloatingDock items={project.skills.frontend} />
                   </div>
@@ -121,7 +121,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
                 {project.skills.backend?.length > 0 && (
                   <div className="flex flex-col items-center md:items-start gap-2">
                     <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-medium">
-                      Backend
+                      Systems &amp; Mechanics
                     </span>
                     <FloatingDock items={project.skills.backend} />
                   </div>

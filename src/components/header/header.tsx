@@ -12,6 +12,7 @@ import { Button } from "../ui/button";
 import { config } from "@/data/config";
 import OnlineUsers from "../realtime/online-users";
 import { GameTrigger } from "../game/game-trigger";
+import { useLenis } from "@/lib/lenis";
 
 interface HeaderProps {
   loader?: boolean;
@@ -21,7 +22,30 @@ interface HeaderProps {
 
 const Header = ({ loader, githubStars }: HeaderProps) => {
   const [isActive, setIsActive] = useState<boolean>(false);
-  const isHome = usePathname() === "/";
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const lenis = useLenis();
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    setIsActive(false);
+
+    if (pathname === "/") {
+      e.preventDefault();
+      if (window.location.hash) {
+        window.history.replaceState(null, "", "/");
+      }
+      if (lenis) {
+        lenis.scrollTo(0, { force: true });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    } else {
+      window.scrollTo(0, 0);
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true, force: true });
+      }
+    }
+  };
   return (
     <motion.header
       className={cn(
@@ -52,7 +76,11 @@ const Header = ({ loader, githubStars }: HeaderProps) => {
       >
       </div> */}
       <div className={cn(styles.bar, "flex items-center justify-between")}>
-        <Link href="/" className="flex items-center justify-center">
+        <Link
+          href="/"
+          onClick={handleLogoClick}
+          className="flex items-center justify-center"
+        >
           <Button variant={"link"} className="text-md">
             {config.author}
           </Button>

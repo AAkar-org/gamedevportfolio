@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import FunnyThemeToggle from "@/components/theme/funny-theme-toggle";
+import { useLenis } from "@/lib/lenis";
 
 interface SelectedLink {
   isActive: boolean;
@@ -28,6 +29,22 @@ export default function Body({
 }: BodyProps) {
   const params = useParams();
   const [currentHref, setCurrentHref] = useState("/");
+  const lenis = useLenis();
+
+  const handleLinkClick = (href: string, e: React.MouseEvent) => {
+    setIsActive(false);
+    if (href === "/" && window.location.pathname === "/") {
+      e.preventDefault();
+      if (window.location.hash) {
+        window.history.replaceState(null, "", "/");
+      }
+      if (lenis) {
+        lenis.scrollTo(0, { force: true });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  };
   useEffect(() => {
     if (typeof window === "undefined") return;
     const { pathname, hash } = window.location;
@@ -72,7 +89,7 @@ export default function Body({
                 "font-display rounded-lg",
                 currentHref !== href ? "text-muted-foreground" : "underline"
               )}
-              onClick={() => setIsActive(false)}
+              onClick={(e) => handleLinkClick(href, e)}
               onMouseOver={() => setSelectedLink({ isActive: true, index })}
               onMouseLeave={() => setSelectedLink({ isActive: false, index })}
               variants={blur}

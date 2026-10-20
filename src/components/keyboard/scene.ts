@@ -45,7 +45,7 @@ const KIT = {
 
 export const KEYBOARD_MODEL_URL = "/assets/keyboard/keycaps.glb";
 
-export function createKeyboardScene(skills: readonly KeyboardSkill[], columns = 6): KeyboardScene {
+export function createKeyboardScene(skills: readonly KeyboardSkill[], columns = 6, isDark = true): KeyboardScene {
   if (!skills.length || skills.length > 96) throw new RangeError("Choose between 1 and 96 keyboard skills");
   if (!Number.isInteger(columns) || columns < 1 || columns > 12) throw new RangeError("Keyboard columns must be between 1 and 12");
   if (new Set(skills.map((s) => s.name)).size !== skills.length) throw new Error("Keyboard skill names must be unique");
@@ -107,7 +107,7 @@ export function createKeyboardScene(skills: readonly KeyboardSkill[], columns = 
   const outerZ = innerZ + KIT.halfD - KIT.cutZ;
   const labelsId = group("Skill labels", layout, [-outerX + KIT.pitch / 2, 1.15, -outerZ - 0.7]);
   doc.nodes[labelsId].visible = false;
-  const textMaterial = material("Skill text", { color: "#ffffff", roughness: 0.8 });
+  const textMaterial = material("Skill text", { color: isDark ? "#ffffff" : "#171819", roughness: 0.8 });
   const label = (title: string, description: string) => {
     const id = group(`Label ${title}`, labelsId);
     doc.nodes[id].visible = false;
@@ -118,8 +118,8 @@ export function createKeyboardScene(skills: readonly KeyboardSkill[], columns = 
       transform: { ...transform([-bounds.left * size, 0, -0.65]), rotation: [-Math.PI / 2, 0, 0] },
       visible: true, castShadow: true, receiveShadow: true, children: [] }, id);
     const descriptionId = newId("as");
-    doc.assets[descriptionId] = { id: descriptionId, kind: "texture", name: descriptionArtwork(description),
-      hash: `description-${id}`, size: 0 };
+    doc.assets[descriptionId] = { id: descriptionId, kind: "texture", name: descriptionArtwork(description, isDark),
+      hash: `description-${id}-${isDark ? "dark" : "light"}`, size: 0 };
     const descriptionMaterial = material(`Description ${title}`, { color: "#ffffff", roughness: 1,
       transparent: true, maps: { map: descriptionId, normalMap: null, roughnessMap: null } });
     add({ id: newId("nd"), name: `Description ${title}`, type: "mesh", materialId: descriptionMaterial,
@@ -182,7 +182,7 @@ export const resolveKeyboardAsset = async (asset: ChibiDocument["assets"][string
   asset.name === "keycaps.glb" ? KEYBOARD_MODEL_URL : asset.name;
 
 /** Rasterized by the texture loader, then rendered on a scene mesh. */
-function descriptionArtwork(text: string): string {
+function descriptionArtwork(text: string, isDark = true): string {
   const lines: string[] = [];
   const caption = text.replace(/\p{Extended_Pictographic}|[\uFE0F\u200D]/gu, "").trim();
   for (const word of caption.split(/\s+/)) {
@@ -191,7 +191,8 @@ function descriptionArtwork(text: string): string {
   }
   const escape = (line: string) => line.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   const size = Math.min(68, 250 / Math.max(lines.length, 1));
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="300" viewBox="0 0 1024 300"><g fill="white" font-family="Arial, sans-serif" font-size="${size}" text-anchor="start">${lines.map((line, index) => `<text x="0" y="${78 + index * size * 1.2}">${escape(line)}</text>`).join("")}</g></svg>`;
+  const fill = isDark ? "white" : "#171819";
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="300" viewBox="0 0 1024 300"><g fill="${fill}" font-family="Arial, sans-serif" font-size="${size}" text-anchor="start">${lines.map((line, index) => `<text x="0" y="${78 + index * size * 1.2}">${escape(line)}</text>`).join("")}</g></svg>`;
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
 }
 

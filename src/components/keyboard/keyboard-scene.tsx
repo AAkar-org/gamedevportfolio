@@ -3,6 +3,7 @@
 import { memo, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { ChibiScene, type ChibiSceneApi, type ScenePointerEvent, type RuntimeEvent } from "@chibi3d/runtime";
 import { SKILLS } from "@/data/constants";
+import { useTheme } from "next-themes";
 import { setSceneStatus } from "@/lib/scene-health";
 import { usePreloader } from "../preloader";
 import { createKeyboardScene, resolveKeyboardAsset, type KeyboardSkill } from "./scene";
@@ -21,6 +22,8 @@ const SCENE_STYLE: CSSProperties = {
 
 export default function KeyboardScene({ maxDpr }: { maxDpr: number }) {
   const { isLoading, bypassLoading } = usePreloader();
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme !== "light";
   const api = useRef<ChibiSceneApi>(null);
   const failed = useRef(false);
   const motion = useRef<ReturnType<typeof createKeyboardMotion> | null>(null);
@@ -31,19 +34,21 @@ export default function KeyboardScene({ maxDpr }: { maxDpr: number }) {
   const playSound = useKeyboardSounds();
   const scene = useMemo(() => createKeyboardScene(Object.values(SKILLS).map((skill) => ({
     ...skill, icon: skill.keyboardIcon ?? skill.icon,
-  }))), []);
+  })), 6, isDark), [isDark]);
   const { settings: graphics, markActive } = useAdaptiveGraphics(ready && !isLoading);
-  const { shadows, softShadows, ao, bloom, lighting } = graphics;
+  const { shadows, softShadows, lighting } = graphics;
   const environment = useMemo(() => ({
     ...scene.document.environment,
-    shadows, softShadows, ao, bloom,
+    shadows, softShadows,
+    ao: false,
+    bloom: false,
     contactShadows: false,
     vignette: false,
     preset: lighting ? scene.document.environment.preset : null,
-  }), [scene, shadows, softShadows, ao, bloom, lighting]);
+  }), [scene, shadows, softShadows, lighting]);
   const dpr = useMemo<[number, number]>(() =>
     [0.5, Math.min(graphics.dpr, maxDpr)], [maxDpr, graphics.dpr]);
-  const visibleLabel = useRef<string | null>(null);
+  const selectedSkillName = useRef<string | null>(null);
   const input = useMemo(() => createKeyInput(scene.keys), [scene]);
   useEffect(() => input.subscribe((key, pressed) => {
     markActive();
@@ -53,9 +58,11 @@ export default function KeyboardScene({ maxDpr }: { maxDpr: number }) {
       emissiveIntensity: pressed ? 0.7 : 0,
     });
     if (pressed) {
-      api.current?.setNodeVisible(visibleLabel.current ?? scene.defaultLabelId, false);
-      api.current?.setNodeVisible(key.labelId, true);
-      visibleLabel.current = key.labelId;
+      selectedSkillName.current = key.skill.name;
+      api.current?.setNodeVisible(scene.defaultLabelId, false);
+      for (const k of scene.keys) {
+        api.current?.setNodeVisible(k.labelId, k.labelId === key.labelId);
+      }
       setSelected(key.skill);
     }
     playSound(pressed);
@@ -107,10 +114,11 @@ export default function KeyboardScene({ maxDpr }: { maxDpr: number }) {
 
   useEffect(() => {
     if (!ready) return;
-    // Restore the selected label if the runtime remounts.
-    const active = visibleLabel.current ?? scene.defaultLabelId;
+    const targetLabelId = selectedSkillName.current
+      ? scene.keys.find((k) => k.skill.name === selectedSkillName.current)?.labelId ?? scene.defaultLabelId
+      : scene.defaultLabelId;
     for (const id of [scene.defaultLabelId, ...scene.keys.map((key) => key.labelId)]) {
-      api.current?.setNodeVisible(id, id === active);
+      api.current?.setNodeVisible(id, id === targetLabelId);
     }
   }, [ready, loadVersion, scene]);
 
@@ -139,6 +147,7 @@ export default function KeyboardScene({ maxDpr }: { maxDpr: number }) {
   return (
     <>
       <SceneCanvas
+        key={isDark ? "dark" : "light"}
         document={scene.document}
         environment={environment}
         resolveAsset={resolveKeyboardAsset}

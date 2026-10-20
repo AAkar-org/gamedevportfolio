@@ -50,19 +50,19 @@ const HeroSection = () => {
                     <TooltipTrigger asChild>
                       <h1
                         className={cn(
-                          "-ml-[6px] leading-none text-transparent text-slate-800 text-left",
+                          "-ml-[6px] leading-none text-foreground text-left",
                           "font-bold text-7xl md:text-7xl lg:text-8xl xl:text-9xl",
-                          "cursor-default text-edge-outline font-display "
+                          "cursor-default font-display"
                         )}
                       >
                         {config.author.split(" ")[0]}
-                        <br className="md:block hiidden" />
+                        <br className="md:block hidden" />
                         {config.author.split(" ")[1]}
                       </h1>
                     </TooltipTrigger>
                     <TooltipContent
                       side="top"
-                      className="dark:bg-white dark:text-black"
+                      className="bg-popover text-popover-foreground border border-border shadow-md"
                     >
                       theres something waiting for you in devtools
                     </TooltipContent>
@@ -76,16 +76,22 @@ const HeroSection = () => {
                       "cursor-default sm:text-xl md:text-xl whitespace-nowrap bg-clip-text "
                     )}
                   >
-                    A Full Stack Web Developer
+                    Game Developer | Unity &amp; Unreal Engine
                   </p>
+                </BlurIn>
+                <BlurIn delay={1.4}>
+                  <div className="mt-3 flex items-center gap-2 text-xs font-mono text-primary bg-primary/10 border border-primary/20 px-3 py-1 rounded-full w-fit">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    </span>
+                    <span>Upcoming: Surviving the Adventures of Isla Sentinel</span>
+                  </div>
                 </BlurIn>
               </div>
               <div className="mt-8 flex flex-col gap-3 w-fit">
                 <Link
-                  href={
-                    "https://drive.google.com/file/d/1MTSsUA8V7Po2AsNXT8kZ5sLOpzC8l7qm/view?usp=sharing"
-                  }
-                  target="_blank"
+                  href="/resume"
                   className="flex-1"
                 >
                   <BoxReveal delay={2} width="100%" >

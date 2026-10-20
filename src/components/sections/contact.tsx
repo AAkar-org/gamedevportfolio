@@ -24,17 +24,35 @@ const ContactSection = () => {
         <Card className="min-w-7xl bg-white/70 dark:bg-black/70 backdrop-blur-sm rounded-xl mt-10 md:mt-20">
           <CardHeader>
             <CardTitle className="text-4xl">Contact Form</CardTitle>
-            <CardDescription>
-              Please contact me directly at{" "}
-              <a
-                target="_blank"
-                href={`mailto:${config.email}`}
-                className="text-gray-200 cursor-can-hover rounded-lg"
-              >
-                {config.email.replace(/@/g, "(at)")}
-              </a>{" "}
-              or drop your info here.
-            </CardDescription>
+            <div className="text-sm text-muted-foreground space-y-1">
+              <p>
+                Reach out directly via email at{" "}
+                <a
+                  target="_blank"
+                  href={`mailto:${config.email}`}
+                  className="font-semibold text-primary underline cursor-can-hover"
+                >
+                  {config.email}
+                </a>
+                , phone at{" "}
+                <a
+                  href={`tel:${config.phone}`}
+                  className="font-semibold text-primary underline cursor-can-hover"
+                >
+                  {config.phone}
+                </a>
+                , or connect on{" "}
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={config.social.linkedin}
+                  className="font-semibold text-primary underline cursor-can-hover"
+                >
+                  LinkedIn
+                </a>{" "}
+                (Indore, India).
+              </p>
+            </div>
           </CardHeader>
           <CardContent>
             <ContactForm />

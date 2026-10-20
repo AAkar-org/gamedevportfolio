@@ -15,10 +15,10 @@ if (process.env.NODE_ENV === "development") {
 import { Suspense } from "react";
 import Script from "next/script";
 import SiteFrame from "@/components/site-frame";
-import GitHubStars from "@/components/header/github-stars";
 import { Providers } from "@/components/providers";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { UMAMI_SRC } from "@/lib/umami";
+import ServiceWorkerCleaner from "@/components/sw-cleaner";
 
 /* Body/base font — Space Grotesk, bound to --font-sans (applied as `font-sans`
  * on <html>). Everything that isn't a heading inherits this. */
@@ -85,6 +85,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body>
+        <ServiceWorkerCleaner />
         {process.env.UMAMI_SITE_ID && (
           <Script
             defer
@@ -93,13 +94,7 @@ export default function RootLayout({
           />
         )}
         <Providers>
-          <SiteFrame
-            githubStars={
-              <Suspense fallback={null}>
-                <GitHubStars className="mr-4" />
-              </Suspense>
-            }
-          >
+          <SiteFrame>
             {children}
           </SiteFrame>
         </Providers>
