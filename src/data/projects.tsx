@@ -117,7 +117,7 @@ const projects: Project[] = [
   {
     id: "isla-sentinel",
     category: "Unreal Engine 5 • Major Project",
-    title: "Niagara Fluid Simulation",
+    title: "Water System Demonstration",
     description: "Water advanced and water plugins used in making the ocean",
     src: `${BASE_PATH}/isla-sentinel/water-island.jpg`,
     screenshots: ["water-island.jpg"],
@@ -140,10 +140,10 @@ const projects: Project[] = [
       return (
         <div className="space-y-6">
           <TypographyP className="font-mono text-xl font-bold">
-            Implemented Niagara Fluid Simulations
+            Water System Demonstration
           </TypographyP>
           <TypographyP className="font-mono leading-relaxed">
-            Water advanced and water plugins used in making the ocean.
+            Water advanced and water plugins used in making the ocean with Niagara fluid simulation.
           </TypographyP>
 
           {/* Environment Showcase Video */}
@@ -151,7 +151,7 @@ const projects: Project[] = [
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono font-bold text-foreground flex items-center gap-2">
                 <Play className="w-3.5 h-3.5 text-primary fill-current" />
-                Implemented Niagara Fluid Simulations: Water Island
+                Water System Demonstration: Water Island
               </span>
               <span className="text-[10px] font-mono text-muted-foreground border border-border px-2 py-0.5 rounded">
                 1080p • 60 FPS • 0:23
@@ -177,7 +177,10 @@ const projects: Project[] = [
           <TypographyH3 className="my-4 mt-8">Core Gameplay Systems</TypographyH3>
           <ul className="list-disc list-outside ml-6 space-y-2 font-mono text-sm text-muted-foreground">
             <li>
-              <strong className="text-foreground">Ocean &amp; Water Simulation:</strong> Water advanced and water plugins used in making the ocean, integrating Niagara fluid systems and real-time buoyancy.
+              <strong className="text-foreground">Niagara Fluid Simulation:</strong> Implemented real-time fluid dynamics, water surface interactions, and particle-based aquatic simulations using Unreal Engine&apos;s Niagara systems.
+            </li>
+            <li>
+              <strong className="text-foreground">Ocean &amp; Water Simulation:</strong> Water advanced and water plugins used in making the ocean, integrating dynamic buoyancy and interactive wave displacement.
             </li>
             <li>
               <strong className="text-foreground">Atmospheric World Architecture:</strong> Built with Unreal Engine 5 real-time dynamic global illumination (Lumen) and high-density geometric detail (Nanite).
