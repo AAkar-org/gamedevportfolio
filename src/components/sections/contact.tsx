@@ -49,6 +49,24 @@ const ContactSection = () => {
                   className="font-semibold text-primary underline cursor-can-hover"
                 >
                   LinkedIn
+                </a>
+                {", "}
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={config.social.instagram}
+                  className="font-semibold text-primary underline cursor-can-hover"
+                >
+                  Instagram
+                </a>
+                {", or "}
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={config.social.youtube}
+                  className="font-semibold text-primary underline cursor-can-hover"
+                >
+                  YouTube
                 </a>{" "}
                 (Indore, India).
               </p>

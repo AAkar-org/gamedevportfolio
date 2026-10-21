@@ -137,6 +137,33 @@ const projects: Project[] = [
     get content() {
       return (
         <div className="space-y-6">
+          {/* Environment Showcase Video */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-mono font-bold text-foreground flex items-center gap-2">
+                <Play className="w-3.5 h-3.5 text-primary fill-current" />
+                Environment Showcase: Water Island
+              </span>
+              <span className="text-[10px] font-mono text-muted-foreground border border-border px-2 py-0.5 rounded">
+                1080p • 60 FPS • 0:23
+              </span>
+            </div>
+            <div className="relative aspect-video w-full rounded-xl overflow-hidden border border-border shadow-lg bg-black">
+              <video
+                controls
+                playsInline
+                preload="metadata"
+                poster={`${BASE_PATH}/isla-sentinel/water-island.jpg`}
+                className="w-full h-full object-contain"
+              >
+                <source
+                  src={`${BASE_PATH}/isla-sentinel/environment.mp4`}
+                  type="video/mp4"
+                />
+                Your browser does not support HTML5 video.
+              </video>
+            </div>
+          </div>
 
           <TypographyH3 className="my-4 mt-8">Core Gameplay Systems</TypographyH3>
           <ul className="list-disc list-outside ml-6 space-y-2 font-mono text-sm text-muted-foreground">

@@ -35,11 +35,9 @@ const config = {
     return this.site + "/assets/seo/og-image.png";
   },
   social: {
-    twitter: "https://x.com",
+    instagram: "https://www.instagram.com/hardikjoy1209",
     linkedin: "https://www.linkedin.com/in/hardik-jain-3790bb158",
-    instagram: "https://www.instagram.com",
-    facebook: "https://www.facebook.com",
-    github: "https://github.com/AAkar-org",
+    youtube: "https://www.youtube.com/@ragehitmanyt",
   },
 };
 export { config };

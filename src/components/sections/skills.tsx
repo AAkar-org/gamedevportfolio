@@ -35,7 +35,7 @@ const SkillsSection = () => {
         id="skills"
         title="Tech Stack"
         desc={showGrid ? "Tools I build with" : "(hint: press a key)"}
-        className={showGrid ? "static mb-14" : undefined}
+        className={showGrid ? "mb-14" : "top-[70px] sticky mb-96"}
       />
       <ul className={showGrid ? "mx-auto grid w-full max-w-5xl grid-cols-2 gap-3 px-4 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5" : "sr-only"}>
         {Object.values(SKILLS).map((skill) => (

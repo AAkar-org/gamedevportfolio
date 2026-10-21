@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
-import { File, Github, Linkedin } from "lucide-react";
+import { File } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -11,7 +11,7 @@ import {
 import { usePreloader } from "../preloader";
 import { BlurIn, BoxReveal } from "../reveal-animations";
 import ScrollDownIcon from "../scroll-down-icon";
-import { SiGithub, SiLinkedin, SiX } from "react-icons/si";
+import { SiInstagram, SiLinkedin, SiYoutube } from "react-icons/si";
 import { config } from "@/data/config";
 
 import SectionWrapper from "../ui/section-wrapper";
@@ -102,46 +102,43 @@ const HeroSection = () => {
                   </BoxReveal>
                 </Link>
                 <div className="md:self-start flex gap-3">
-                  <Tooltip delayDuration={300}>
-                    <TooltipTrigger asChild>
-                      <Link href={"#contact"}>
-                        <Button
-                          variant={"outline"}
-                          className="block w-full overflow-hidden"
-                        >
-                          Hire Me
-                        </Button>
-                      </Link>
-                    </TooltipTrigger>
-                    <TooltipContent side="bottom">
-                      <p>pls 🥹 🙏</p>
-                    </TooltipContent>
-                  </Tooltip>
+                  <Link href={"#contact"}>
+                    <Button
+                      variant={"outline"}
+                      className="block w-full overflow-hidden"
+                    >
+                      Hire Me
+                    </Button>
+                  </Link>
                   <div className="flex items-center h-full gap-2">
                     <Link
-                      href={config.social.twitter}
-                      target="_blank"
-                    >
-                      <Button variant={"outline"}>
-                        <SiX size={24} />
-                      </Button>
-                    </Link>
-                    <Link
-                      href={config.social.github}
+                      href={config.social.instagram}
                       target="_blank"
                       className="cursor-can-hover"
+                      aria-label="Instagram"
                     >
                       <Button variant={"outline"}>
-                        <SiGithub size={24} />
+                        <SiInstagram size={24} />
                       </Button>
                     </Link>
                     <Link
                       href={config.social.linkedin}
                       target="_blank"
                       className="cursor-can-hover"
+                      aria-label="LinkedIn"
                     >
                       <Button variant={"outline"}>
                         <SiLinkedin size={24} />
+                      </Button>
+                    </Link>
+                    <Link
+                      href={config.social.youtube}
+                      target="_blank"
+                      className="cursor-can-hover"
+                      aria-label="YouTube"
+                    >
+                      <Button variant={"outline"}>
+                        <SiYoutube size={24} />
                       </Button>
                     </Link>
                   </div>
