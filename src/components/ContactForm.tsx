@@ -68,10 +68,10 @@ const ContactForm = () => {
         router.push("/");
         clearTimeout(timer);
       }, 1000);
-    } catch (err) {
+    } catch (err: any) {
       toast({
-        title: "Error",
-        description: "Something went wrong! Please try again.",
+        title: "Message Failed",
+        description: err?.message || "Something went wrong! Please try again or email directly.",
         className: cn(
           "top-0 w-full flex justify-center fixed md:max-w-7xl md:top-4 md:right-4"
         ),
