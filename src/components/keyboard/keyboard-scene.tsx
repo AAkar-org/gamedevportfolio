@@ -1,7 +1,24 @@
 "use client";
 
 import { memo, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import { setConsoleFunction } from "three";
 import { ChibiScene, type ChibiSceneApi, type ScenePointerEvent, type RuntimeEvent } from "@chibi3d/runtime";
+
+if (typeof window !== "undefined") {
+  setConsoleFunction((type, message, ...params) => {
+    if (type === "warn" && typeof message === "string" && message.includes("Clock: This module has been deprecated")) {
+      return;
+    }
+    console[type](message, ...params);
+  });
+
+  const origWarn = console.warn;
+  console.warn = (...args: unknown[]) => {
+    const msg = args.map((a) => (typeof a === "string" ? a : "")).join(" ");
+    if (msg.includes("Clock: This module has been deprecated") || msg.includes("THREE.Clock")) return;
+    return origWarn.apply(console, args);
+  };
+}
 import { SKILLS } from "@/data/constants";
 import { useTheme } from "next-themes";
 import { setSceneStatus } from "@/lib/scene-health";
@@ -171,14 +188,6 @@ export default function KeyboardScene({ maxDpr }: { maxDpr: number }) {
               {selected?.shortDescription ?? "Hover, tap, or press a letter key"}
             </p>
           </div>
-          <a
-            href="https://www.npmjs.com/package/@chibi3d/runtime"
-            target="_blank"
-            rel="noreferrer"
-            className="pointer-events-auto text-xs text-muted-foreground underline underline-offset-4"
-          >
-            Rendered with Chibi
-          </a>
         </div>
       )}
     </>

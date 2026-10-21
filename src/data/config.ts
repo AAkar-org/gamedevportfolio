@@ -25,7 +25,7 @@ const config = {
   email: "hardikjoy@gmail.com",
   phone: "+91-8958298119",
   location: "Indore, India",
-  site: "https://hardikjain.dev",
+  site: "https://hardikjaingamedev.online",
 
   // for github stars button
   githubUsername: "AAkar-org",
