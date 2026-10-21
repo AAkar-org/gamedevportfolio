@@ -403,16 +403,77 @@ const AboutSection = () => {
                 </span>
 
                 <div className="space-y-2.5 flex-1 flex flex-col justify-between">
-                  <div className="p-3 rounded-xl border border-border/50 bg-secondary/20 hover:border-red-500/30 transition-colors">
-                    <div className="flex items-center gap-2">
-                      <div className="p-1.5 rounded-md bg-red-500/10 text-red-400">
-                        <Flame className="w-4 h-4" />
+                  {/* Compact Most Played Genres & Games Card (PC & Mobile) */}
+                  <div className="p-3 rounded-xl border border-red-500/30 bg-secondary/20 hover:border-red-500/50 transition-colors space-y-2.5">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <div className="p-1 rounded-md bg-red-500/10 text-red-400">
+                          <Gamepad2 className="w-3.5 h-3.5" />
+                        </div>
+                        <h5 className="text-xs font-bold text-foreground">
+                          Most Played Genres &amp; Library
+                        </h5>
                       </div>
-                      <h5 className="text-sm font-bold text-foreground">FPS &amp; Tactical Shooter Mechanics</h5>
+                      <Badge
+                        variant="outline"
+                        className="text-[10px] font-mono border-red-500/40 text-red-400 bg-red-500/10 shrink-0 px-1.5 py-0"
+                      >
+                        PC &amp; Mobile
+                      </Badge>
                     </div>
-                    <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                      Rigorous stress testing of weapon recoil, crosshair recoil resets, hit registration, and player movement momentum in competitive FPS environments like Valorant.
-                    </p>
+
+                    {/* Genres Chips */}
+                    <div>
+                      <span className="text-[10px] font-mono font-semibold text-muted-foreground block mb-1">
+                        Top Genres:
+                      </span>
+                      <div className="flex flex-wrap gap-1">
+                        {[
+                          "FPS",
+                          "Survival Adventure",
+                          "RPG",
+                          "Casual",
+                          "Platformer",
+                          "Battle Royale",
+                        ].map((genre) => (
+                          <span
+                            key={genre}
+                            className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-secondary/80 text-foreground/90 border border-border/50"
+                          >
+                            {genre}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Games Played Chips */}
+                    <div className="pt-2 border-t border-border/30">
+                      <span className="text-[10px] font-mono font-semibold text-muted-foreground block mb-1">
+                        Games He Plays:
+                      </span>
+                      <div className="flex flex-wrap gap-1">
+                        {[
+                          "VALORANT",
+                          "CS2",
+                          "The Witcher 3: Wild Hunt",
+                          "GTA 5",
+                          "S.T.A.L.K.E.R. 2",
+                          "The Last of Us Part 1",
+                          "The Last of Us Part 2",
+                          "Alan Wake",
+                          "Alan Wake 2",
+                          "Assassin's Creed Origins",
+                          "Dakar Desert Rally",
+                        ].map((game) => (
+                          <span
+                            key={game}
+                            className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-background/70 text-foreground/80 border border-border/40 hover:border-red-500/40 hover:text-red-400 transition-colors"
+                          >
+                            {game}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
 
                   {/* Steam Playtest & QA Verification Card */}
