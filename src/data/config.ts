@@ -37,7 +37,7 @@ const config = {
   social: {
     instagram: "https://www.instagram.com/hardikjoy1209",
     linkedin: "https://www.linkedin.com/in/hardik-jain-3790bb158",
-    youtube: "https://www.youtube.com/@ragehitmanyt",
+    youtube: "https://youtube.com/@hardikjaingamedev?si=Al8XXz0wHddquj2O",
   },
 };
 export { config };

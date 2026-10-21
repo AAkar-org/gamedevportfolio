@@ -23,6 +23,7 @@ import { SectionHeader } from "./section-header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { config } from "@/data/config";
 
 const AboutSection = () => {
   return (

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import {
   ResponsiveDialog,
   ResponsiveDialogContent,
@@ -7,6 +7,7 @@ import {
 } from "../ui/responsive-dialog";
 import { FloatingDock } from "../ui/floating-dock";
 import { ScrollArea } from "../ui/scroll-area";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
@@ -15,7 +16,6 @@ import projects, { Project } from "@/data/projects";
 import { SectionHeader } from "./section-header";
 
 import SectionWrapper from "../ui/section-wrapper";
-import ScrollingPreview from "../scrolling-preview";
 
 const ProjectsSection = () => {
   return (
@@ -31,27 +31,20 @@ const ProjectsSection = () => {
 };
 
 const ProjectCard = ({ project }: { project: Project }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center w-full">
       <ResponsiveDialog>
         <ResponsiveDialogTrigger className="bg-transparent flex justify-center w-full">
           <div
-            className="group relative w-full h-auto rounded-lg overflow-hidden ring-1 ring-white/5"
+            className="group relative w-full h-auto rounded-xl overflow-hidden border border-border/70 hover:border-primary/50 transition-all duration-300 shadow-md hover:shadow-xl bg-card"
             style={{ aspectRatio: "3/2" }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            onFocus={() => setIsHovered(true)}
-            onBlur={() => setIsHovered(false)}
           >
-            {/* `src` can be any aspect ratio (tall pages pan, normal ones fit);
-                the wallpaper is an optional /assets/backgrounds/<id>.jpg. */}
-            <ScrollingPreview
+            <Image
               src={project.src}
               alt={project.title}
-              bg={`/assets/backgrounds/${project.id}.jpg`}
-              isHovered={isHovered}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
             />
             <div className="absolute w-full min-h-24 pb-3 pt-6 bottom-0 left-0 bg-gradient-to-t from-background via-background/85 to-transparent pointer-events-none z-10">
               <div className="flex flex-col h-full items-start justify-end px-4">
