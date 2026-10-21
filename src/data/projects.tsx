@@ -117,7 +117,7 @@ const projects: Project[] = [
   {
     id: "isla-sentinel",
     category: "Unreal Engine 5 • Major Project",
-    title: "Surviving the Adventures of Isla Sentinel",
+    title: "Niagara Fluid Simulation",
     description: "Water advanced and water plugins used in making the ocean",
     src: `${BASE_PATH}/isla-sentinel/water-island.jpg`,
     screenshots: ["water-island.jpg"],

@@ -84,7 +84,7 @@ const HeroSection = () => {
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                     </span>
-                    <span className="truncate sm:whitespace-normal">Upcoming: Surviving the Adventures of Isla Sentinel</span>
+                    <span className="truncate sm:whitespace-normal">Upcoming: Niagara Fluid Simulation</span>
                   </div>
                 </BlurIn>
               </div>
