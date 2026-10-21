@@ -12,8 +12,7 @@ export interface ShockwaveData {
 
 function cameraShake(intensity: number) {
   const el = document.body;
-  const marginLeft = el.style.marginLeft;
-  const marginTop = el.style.marginTop;
+  const originalTransform = el.style.transform;
   const m = 0.5 + intensity * 2; // multiplier: 0.5x at min, 2.5x at max
   const steps = [
     { x: 1.2 * m, y: -0.75 * m },
@@ -24,18 +23,15 @@ function cameraShake(intensity: number) {
   const interval = 90;
   const timers = steps.map(({ x, y }, i) =>
     setTimeout(() => {
-      el.style.marginLeft = `${x}px`;
-      el.style.marginTop = `${y}px`;
+      el.style.transform = (x || y) ? `translate3d(${x}px, ${y}px, 0)` : originalTransform;
       if (i === steps.length - 1) {
-        el.style.marginLeft = marginLeft;
-        el.style.marginTop = marginTop;
+        el.style.transform = originalTransform;
       }
     }, i * interval)
   );
   return () => {
     timers.forEach(clearTimeout);
-    el.style.marginLeft = marginLeft;
-    el.style.marginTop = marginTop;
+    el.style.transform = originalTransform;
   };
 }
 
@@ -54,52 +50,56 @@ export function Shockwave({ data }: { data: ShockwaveData }) {
     >
       {/* Outer ring */}
       <motion.div
-        initial={{ width: 0, height: 0, opacity: 1 }}
-        animate={{ width: 300 * s, height: 300 * s, opacity: 0 }}
+        initial={{ scale: 0, opacity: 1, x: "-50%", y: "-50%" }}
+        animate={{ scale: 1, opacity: 0, x: "-50%", y: "-50%" }}
         transition={{ duration: 1.4, ease: 'easeOut' }}
         className="absolute rounded-full"
         style={{
+          width: 300 * s,
+          height: 300 * s,
           borderWidth: 3,
           borderColor: data.color,
-          transform: 'translate(-50%, -50%)',
           boxShadow: `0 0 ${40 * s}px ${data.color}80, inset 0 0 ${40 * s}px ${data.color}30`,
         }}
       />
 
       {/* Mid ring */}
       <motion.div
-        initial={{ width: 0, height: 0, opacity: 0.8 }}
-        animate={{ width: 200 * s, height: 200 * s, opacity: 0 }}
+        initial={{ scale: 0, opacity: 0.8, x: "-50%", y: "-50%" }}
+        animate={{ scale: 1, opacity: 0, x: "-50%", y: "-50%" }}
         transition={{ duration: 1.1, ease: 'easeOut', delay: 0.1 }}
         className="absolute rounded-full border-2"
         style={{
+          width: 200 * s,
+          height: 200 * s,
           borderColor: data.color,
-          transform: 'translate(-50%, -50%)',
           boxShadow: `0 0 ${25 * s}px ${data.color}50`,
         }}
       />
 
       {/* Inner ring */}
       <motion.div
-        initial={{ width: 0, height: 0, opacity: 0.6 }}
-        animate={{ width: 120 * s, height: 120 * s, opacity: 0 }}
+        initial={{ scale: 0, opacity: 0.6, x: "-50%", y: "-50%" }}
+        animate={{ scale: 1, opacity: 0, x: "-50%", y: "-50%" }}
         transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
         className="absolute rounded-full border"
         style={{
+          width: 120 * s,
+          height: 120 * s,
           borderColor: data.color,
-          transform: 'translate(-50%, -50%)',
         }}
       />
 
       {/* Center glow burst */}
       <motion.div
-        initial={{ width: 0, height: 0, opacity: 0.6 }}
-        animate={{ width: 80 * s, height: 80 * s, opacity: 0 }}
+        initial={{ scale: 0, opacity: 0.6, x: "-50%", y: "-50%" }}
+        animate={{ scale: 1, opacity: 0, x: "-50%", y: "-50%" }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
         className="absolute rounded-full"
         style={{
+          width: 80 * s,
+          height: 80 * s,
           background: `radial-gradient(circle, ${data.color}90 0%, transparent 70%)`,
-          transform: 'translate(-50%, -50%)',
         }}
       />
 

@@ -125,6 +125,7 @@ const ScrollingPreview = ({
             backgroundSize: scrolls ? "100% auto" : "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: scrolls ? "50% 0%" : "center",
+            willChange: animate ? "background-position" : "auto",
           }}
           animate={
             animate

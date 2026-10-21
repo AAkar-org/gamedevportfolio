@@ -155,19 +155,40 @@ function ElasticCursor() {
     set.dotOpacity = gsap.quickSetter(dotEl, "opacity");
   }, [isMobile, isBlogPost]);
 
+  const restingFrames = useRef(0);
+
   // Single render loop. Reads everything from refs so it stays stable and the
   // ticker isn't re-added on every hover.
   const render = useCallback(() => {
     if (!set.x) return;
 
-    // Precise dot always tracks the raw pointer.
-    set.dotX(pointer.x);
-    set.dotY(pointer.y);
-
     const el = active.el;
     const wrapping = !!el && wrapsTarget;
     const moveTarget = !!el && movesTarget;
     const hidden = isHiddenRef.current;
+
+    // Sleep render when cursor has settled and is idle (saves 60-120 DOM/setter updates/sec)
+    if (!el && !hidden) {
+      const settled =
+        Math.abs(vel.x) < 0.05 &&
+        Math.abs(vel.y) < 0.05 &&
+        Math.abs(pos.x - jelly.x) < 0.1 &&
+        Math.abs(pos.y - jelly.y) < 0.1 &&
+        Math.abs(pointer.x - pos.x) < 0.1 &&
+        Math.abs(pointer.y - pos.y) < 0.1;
+      if (settled) {
+        restingFrames.current++;
+        if (restingFrames.current > 10) return;
+      } else {
+        restingFrames.current = 0;
+      }
+    } else {
+      restingFrames.current = 0;
+    }
+
+    // Precise dot always tracks the raw pointer.
+    set.dotX(pointer.x);
+    set.dotY(pointer.y);
 
     // Pull the hovered element toward the pointer (magnetic button), capped to an
     // absolute distance. Driven via gsap so its transform cache stays in sync with
@@ -249,6 +270,7 @@ function ElasticCursor() {
   useEffect(() => {
     if (isMobile || isBlogPost) return;
     const onMove = (e: MouseEvent) => {
+      restingFrames.current = 0;
       pointer.x = e.clientX;
       pointer.y = e.clientY;
       if (!cursorMovedRef.current) {
@@ -331,6 +353,7 @@ function ElasticCursor() {
     // Keep the resting bounds correct under scroll (subtract live offset so a
     // translated target doesn't feed back into its own measurement).
     const onScroll = () => {
+      restingFrames.current = 0;
       if (!active.el || !active.base) return;
       const r = active.el.getBoundingClientRect();
       active.base.left = r.left - active.offX;
@@ -371,7 +394,7 @@ function ElasticCursor() {
         ref={jellyRef}
         id={"jelly-id"}
         className={cn(
-          "jelly-blob fixed left-0 top-0 border-2 border-black dark:border-white pointer-events-none will-change-transform"
+          "jelly-blob fixed left-0 top-0 border-2 border-white pointer-events-none will-change-transform"
         )}
         style={{
           width: CURSOR_DIAMETER,
@@ -379,15 +402,15 @@ function ElasticCursor() {
           borderRadius: CURSOR_DIAMETER / 2,
           boxSizing: "border-box",
           zIndex: 100,
-          backdropFilter: "invert(100%)",
+          mixBlendMode: "difference",
         }}
       ></div>
       <div
         ref={dotRef}
-        className="w-3 h-3 rounded-full fixed left-0 top-0 pointer-events-none will-change-transform"
+        className="w-3 h-3 rounded-full fixed left-0 top-0 pointer-events-none will-change-transform bg-white"
         style={{
           opacity: 0,
-          backdropFilter: "invert(100%)",
+          mixBlendMode: "difference",
           zIndex: 101,
         }}
       ></div>

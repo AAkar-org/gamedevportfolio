@@ -34,7 +34,6 @@ export function createKeyboardMotion(
 ) {
   gsap.registerPlugin(ScrollTrigger);
   const setTransform: ChibiSceneApi["setNodeTransform"] = (id, patch) => {
-    onActivity?.();
     return api.setNodeTransform(id, patch);
   };
   let section: KeyboardSection = "hero";
@@ -87,6 +86,7 @@ export function createKeyboardMotion(
   };
   const applySection = (next: KeyboardSection, immediate = false) => {
     if (disposed) return;
+    onActivity?.();
     section = next;
     onSection(next);
     kill(sectionTweens);

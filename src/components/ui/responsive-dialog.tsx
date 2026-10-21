@@ -81,6 +81,8 @@ function ResponsiveDialogContent({
   if (isDesktop) {
     return (
       <DialogContent className={className} {...props}>
+        <DialogTitle className="sr-only">Project Details</DialogTitle>
+        <DialogDescription className="sr-only">Project details and overview</DialogDescription>
         {children}
       </DialogContent>
     );
@@ -88,6 +90,8 @@ function ResponsiveDialogContent({
 
   return (
     <DrawerContent className={className}>
+      <DrawerTitle className="sr-only">Project Details</DrawerTitle>
+      <DrawerDescription className="sr-only">Project details and overview</DrawerDescription>
       <ScrollArea className="max-h-[85vh] px-4 pb-4 overflow-y-auto!" data-lenis-prevent>{children}</ScrollArea>
     </DrawerContent>
   );

@@ -1,7 +1,6 @@
 "use client";
 import { SocketContext } from "@/contexts/socketio";
 import { useCursorPositions } from "@/contexts/cursor-positions";
-import { useMouse } from "@/hooks/use-mouse";
 import { useThrottle } from "@/hooks/use-throttle";
 import { getAvatarUrl } from "@/lib/avatar";
 import { MousePointer2, X } from "lucide-react";
@@ -38,7 +37,6 @@ const RemoteCursors = () => {
   // outside the <ReactLenis> provider. Driving the follow through Lenis instead
   // of window.scrollTo keeps both on the same RAF loop, so it doesn't stutter.
   const lenis = useLenis();
-  const { x, y } = useMouse({ allowPage: true });
   const emitCursor = useCallback((x: number, y: number) => {
     if (!socket?.connected) return;
     socket?.emit("cursor-change", {
@@ -49,8 +47,12 @@ const RemoteCursors = () => {
   const handleMouseMove = useThrottle(emitCursor, 200);
   useEffect(() => {
     if (isMobile) return;
-    handleMouseMove(x, y);
-  }, [x, y, isMobile, handleMouseMove]);
+    const onMove = (e: MouseEvent) => {
+      handleMouseMove(e.pageX, e.pageY);
+    };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => window.removeEventListener("mousemove", onMove);
+  }, [isMobile, handleMouseMove]);
 
   const users = _users.filter((user) => user.isOnline);
   const followedUser = followingId ? users.find((u) => u.socketId === followingId) : null;
@@ -241,10 +243,10 @@ const Cursor = ({
   return (
     <motion.div
       animate={{
-        left: x,
-        top: y,
+        x,
+        y,
       }}
-      className="absolute w-6 h-6 pointer-events-auto"
+      className="absolute top-0 left-0 w-6 h-6 pointer-events-auto"
       transition={reducedMotion ? { duration: 0 } : {
         type: "spring",
         damping: 30,

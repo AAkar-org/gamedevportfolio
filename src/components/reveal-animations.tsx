@@ -21,11 +21,11 @@ export const BlurIn = ({
   className,
   variant,
   delay = 0,
-  duration = 1,
+  duration = 0.8,
 }: BlurIntProps) => {
   const { reducedMotion } = usePerfProfile();
   const defaultVariants = {
-    hidden: { filter: "blur(10px)", opacity: 0 },
+    hidden: { filter: "blur(6px)", opacity: 0 },
     visible: { filter: "blur(0px)", opacity: 1 },
   };
   const combinedVariants = reducedMotion
@@ -38,9 +38,9 @@ export const BlurIn = ({
       animate={reducedMotion ? { filter: "none", opacity: 1 } : "visible"}
       transition={{ duration: reducedMotion ? 0 : duration, delay: reducedMotion ? 0 : delay }}
       variants={combinedVariants}
+      style={{ willChange: "filter, opacity" }}
       className={cn(
         className
-        // "font-display text-center text-4xl font-bold tracking-[-0.02em] drop-shadow-sm md:text-7xl md:leading-[5rem]"
       )}
     >
       {children}
@@ -102,8 +102,8 @@ export const BoxReveal = ({
 
       <motion.div
         variants={{
-          hidden: { left: 0 },
-          visible: { left: "100%" },
+          hidden: { x: "0%" },
+          visible: { x: "100%" },
         }}
         initial={reducedMotion ? "visible" : "hidden"}
         animate={slideControls}
