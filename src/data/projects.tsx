@@ -117,8 +117,8 @@ const projects: Project[] = [
     id: "isla-sentinel",
     category: "Unreal Engine 5 • Major Project",
     title: "Surviving the Adventures of Isla Sentinel",
-    src: `${BASE_PATH}/isla-sentinel/thumbnail.jpg`,
-    screenshots: ["env.jpg", "platform.jpg", "patrol.jpg"],
+    src: `${BASE_PATH}/isla-sentinel/water-island.jpg`,
+    screenshots: ["water-island.jpg"],
     skills: {
       frontend: [
         PROJECT_SKILLS.unreal,
@@ -137,31 +137,6 @@ const projects: Project[] = [
     get content() {
       return (
         <div className="space-y-6">
-          <div className="rounded-xl border border-primary/30 bg-primary/10 p-5 backdrop-blur-sm">
-            <p className="font-mono text-sm uppercase tracking-widest text-primary font-bold">
-              Visionary Flagship Title
-            </p>
-            <h3 className="font-display text-2xl md:text-3xl font-black uppercase text-foreground mt-1">
-              SURVIVING THE ADVENTURES OF ISLA SENTINEL
-            </h3>
-            <p className="font-mono text-sm text-muted-foreground mt-2">
-              This is my upcoming Unreal Engine major project — a high-stakes survival adventure set on the perilous, ancient terrain of Isla Sentinel.
-            </p>
-          </div>
-
-          <TypographyP className="font-mono leading-relaxed">
-            Architected in Unreal Engine 5, Isla Sentinel blends deep survival mechanics with atmospheric environmental storytelling. Players navigate mystical floating ruins, treacherous abyssal chasms, and ancient mechanical puzzles while managing hunger, stamina, environmental exposure, and territorial enemy ecosystems.
-          </TypographyP>
-
-          <ProjectsLinks live={this.live} repo={this.github} label="Project Overview" />
-
-          <SlideShow
-            images={[
-              `${BASE_PATH}/isla-sentinel/env.jpg`,
-              `${BASE_PATH}/isla-sentinel/platform.jpg`,
-              `${BASE_PATH}/isla-sentinel/patrol.jpg`,
-            ]}
-          />
 
           <TypographyH3 className="my-4 mt-8">Core Gameplay Systems</TypographyH3>
           <ul className="list-disc list-outside ml-6 space-y-2 font-mono text-sm text-muted-foreground">
@@ -236,10 +211,10 @@ const projects: Project[] = [
           <TypographyH3 className="my-4 mt-8">Technical Implementation</TypographyH3>
           <ul className="list-disc list-outside ml-6 space-y-2 font-mono text-sm text-muted-foreground">
             <li>
-              <strong className="text-foreground">Cyclic NPC Patrolling:</strong> Implemented sequential and loop patrol point traversal using NavMesh bounds with visual waypoint nodes (colored waypoint markers).
+              <strong className="text-foreground">Cyclic NPC Patrolling:</strong> Implemented sequential and loop patrol point traversal using blueprints and ingame AI systems .
             </li>
             <li>
-              <strong className="text-foreground">Player Detection &amp; Chase Radius:</strong> Configured AI perception cones and radial triggers that detect player movement and trigger state transitions.
+              <strong className="text-foreground">Player Detection &amp; Chase Radius:</strong> Developed chase AI system.
             </li>
             <li>
               <strong className="text-foreground">Blackboard &amp; Behavior Tree Tasks:</strong> Synchronized target vectors, speed modifiers, and search states across Blackboard keys and decorator logic.
@@ -357,7 +332,7 @@ const projects: Project[] = [
               <strong className="text-foreground">Health System &amp; UI Progress Bar:</strong> Designed real-time player health data models connected to a dynamic UMG HUD health bar with damage flash indicators.
             </li>
             <li>
-              <strong className="text-foreground">Locomotion &amp; Collision:</strong> Integrated third-person character movement, obstacle navigation, hit reaction montages, and stamina cost algorithms.
+              <strong className="text-foreground">Locomotion &amp; Collision:</strong> Integrated third-person character movement, obstacle navigation and hit reaction montages.
             </li>
             <li>
               <strong className="text-foreground">Role:</strong> Developer and Tester — developed core mechanics, combat balancing, and user interface from prototype to playable demo.

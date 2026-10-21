@@ -99,7 +99,7 @@ const AboutSection = () => {
 
               <div className="lg:col-span-5 relative aspect-video overflow-hidden rounded-xl border border-border shadow-md group">
                 <Image
-                  src="/assets/projects-screenshots/isla-sentinel/env.jpg"
+                  src="/assets/projects-screenshots/isla-sentinel/water-island.jpg"
                   alt="Surviving the Adventures of Isla Sentinel Environment"
                   fill
                   sizes="(max-width: 1024px) 100vw, 42vw"
