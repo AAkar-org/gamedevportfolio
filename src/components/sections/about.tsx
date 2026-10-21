@@ -80,15 +80,15 @@ const AboutSection = () => {
                 </div>
               </div>
 
-              <div className="lg:col-span-5 relative aspect-video overflow-hidden rounded-xl border border-border shadow-md group">
+              <div className="lg:col-span-5 relative aspect-video overflow-hidden rounded-xl border border-border shadow-md group bg-black/90">
                 <Image
                   src="/assets/projects-screenshots/isla-sentinel/water-island.jpg"
                   alt="Surviving the Adventures of Isla Sentinel Environment"
                   fill
                   sizes="(max-width: 1024px) 100vw, 42vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-contain transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-4">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-4 pointer-events-none">
                   <p className="text-xs text-white/90 font-mono">
                     Environment Concept &amp; Level Prototype • Isla Sentinel
                   </p>

@@ -36,15 +36,14 @@ const ProjectCard = ({ project }: { project: Project }) => {
       <ResponsiveDialog>
         <ResponsiveDialogTrigger className="bg-transparent flex justify-center w-full">
           <div
-            className="group relative w-full h-auto rounded-xl overflow-hidden border border-border/70 hover:border-primary/50 transition-all duration-300 shadow-md hover:shadow-xl bg-card"
-            style={{ aspectRatio: "3/2" }}
+            className="group relative w-full h-auto rounded-xl overflow-hidden border border-border/70 hover:border-primary/50 transition-all duration-300 shadow-md hover:shadow-xl bg-black/90 aspect-video"
           >
             <Image
               src={project.src}
               alt={project.title}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+              className="object-contain transition-transform duration-500 ease-out"
             />
             <div className="absolute w-full min-h-24 pb-3 pt-6 bottom-0 left-0 bg-gradient-to-t from-background via-background/85 to-transparent pointer-events-none z-10">
               <div className="flex flex-col h-full items-start justify-end px-4">
