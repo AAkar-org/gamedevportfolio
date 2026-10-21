@@ -26,12 +26,12 @@ import { Button } from "@/components/ui/button";
 
 const AboutSection = () => {
   return (
-    <SectionWrapper id="about" className="min-h-screen max-w-7xl mx-auto px-4 py-20">
+    <SectionWrapper id="about" className="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
       <SectionHeader
         id="about"
         title="About Me"
         desc="Systems architect, gameplay programmer, and world builder."
-        className="mb-12"
+        className="mb-8 sm:mb-12"
       />
 
       <div className="flex flex-col gap-8 md:gap-12">
@@ -42,11 +42,11 @@ const AboutSection = () => {
           transition={{ duration: 0.5, ease: "easeOut" }}
           viewport={{ once: true, margin: "-50px" }}
         >
-          <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 via-background to-secondary/30 p-6 md:p-8 backdrop-blur-md shadow-lg">
+          <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 via-background to-secondary/30 p-4 sm:p-6 md:p-8 backdrop-blur-md shadow-lg">
             <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl pointer-events-none" />
             
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-7 space-y-4">
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-center">
+              <div className="lg:col-span-7 space-y-3 sm:space-y-4">
                 <div className="flex flex-wrap items-center gap-2">
                   <Badge variant="default" className="bg-primary text-primary-foreground font-mono uppercase text-xs">
                     Upcoming Unreal Major Project
@@ -56,7 +56,7 @@ const AboutSection = () => {
                   </Badge>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-foreground uppercase font-display">
+                <h3 className="text-xl sm:text-3xl md:text-4xl font-black tracking-tight text-foreground uppercase font-display break-words">
                   SURVIVING THE ADVENTURES OF ISLA SENTINEL
                 </h3>
 
@@ -125,7 +125,7 @@ const AboutSection = () => {
                 <p>
                   Whether architecting cyclic NPC patrol routines using NavMesh and Behavior Trees in Unreal Engine 5.6, or calibrating physics-based platform locomotion and GDD-driven features in Unity, my priority is player feel, responsiveness, and clean systems architecture.
                 </p>
-                <div className="pt-2 grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div className="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
                   <div className="p-3 rounded-lg bg-secondary/30 border border-border/50">
                     <Brain className="w-4 h-4 text-primary mb-1" />
                     <p className="font-semibold text-xs text-foreground">AI Behavior Trees</p>
@@ -308,11 +308,12 @@ const AboutSection = () => {
                     href="https://steamcommunity.com/id/ragehitmanyt/"
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="flex-1 sm:flex-none"
                   >
                     <Button
                       variant="outline"
                       size="sm"
-                      className="border-sky-500/40 hover:border-sky-400 bg-sky-950/20 hover:bg-sky-900/40 text-foreground font-mono text-xs gap-1.5 transition-all"
+                      className="w-full border-sky-500/40 hover:border-sky-400 bg-sky-950/20 hover:bg-sky-900/40 text-foreground font-mono text-xs gap-1.5 transition-all justify-center"
                     >
                       <Image
                         src="/assets/keyboard/logos/steam.svg"
@@ -329,11 +330,12 @@ const AboutSection = () => {
                     href="https://discord.gg/subkE5r5"
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="flex-1 sm:flex-none"
                   >
                     <Button
                       variant="outline"
                       size="sm"
-                      className="border-border/70 hover:border-primary/50 text-foreground font-mono text-xs gap-1.5"
+                      className="w-full border-border/70 hover:border-primary/50 text-foreground font-mono text-xs gap-1.5 justify-center"
                     >
                       Discord
                       <ArrowUpRight className="w-3 h-3" />

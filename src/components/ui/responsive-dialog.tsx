@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { cn } from "@/lib/utils";
 import {
   Dialog,
   DialogClose,
@@ -89,10 +90,12 @@ function ResponsiveDialogContent({
   }
 
   return (
-    <DrawerContent className={className}>
+    <DrawerContent className={cn("max-h-[92dvh] flex flex-col p-0 overflow-hidden", className)}>
       <DrawerTitle className="sr-only">Project Details</DrawerTitle>
       <DrawerDescription className="sr-only">Project details and overview</DrawerDescription>
-      <ScrollArea className="max-h-[85vh] px-4 pb-4 overflow-y-auto!" data-lenis-prevent>{children}</ScrollArea>
+      <div className="flex-1 overflow-y-auto overscroll-contain px-2 sm:px-4 pb-6" data-lenis-prevent>
+        {children}
+      </div>
     </DrawerContent>
   );
 }

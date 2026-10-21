@@ -19,9 +19,9 @@ import ScrollingPreview from "../scrolling-preview";
 
 const ProjectsSection = () => {
   return (
-    <SectionWrapper id="projects" className="max-w-7xl mx-auto md:min-h-[130vh] px-4">
-      <SectionHeader id="projects" title="Projects" />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <SectionWrapper id="projects" className="max-w-7xl mx-auto md:min-h-[130vh] px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <SectionHeader id="projects" title="Projects" className="mb-8 md:mb-14" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
@@ -38,7 +38,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
       <ResponsiveDialog>
         <ResponsiveDialogTrigger className="bg-transparent flex justify-center w-full">
           <div
-            className="group relative w-full max-w-[400px] h-auto rounded-lg overflow-hidden ring-1 ring-white/5"
+            className="group relative w-full h-auto rounded-lg overflow-hidden ring-1 ring-white/5"
             style={{ aspectRatio: "3/2" }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -55,7 +55,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
             />
             <div className="absolute w-full h-24 bottom-0 left-0 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-10">
               <div className="flex flex-col h-full items-start justify-end p-4">
-                <div className="text-lg text-left font-bold text-foreground">
+                <div className="text-base sm:text-lg text-left font-bold text-foreground">
                   {project.title}
                 </div>
                 <div className="text-xs bg-primary text-primary-foreground rounded-lg w-fit px-2">
@@ -68,17 +68,17 @@ const ProjectCard = ({ project }: { project: Project }) => {
 
         <ResponsiveDialogContent className="md:max-w-4xl md:h-[85vh] md:!flex md:flex-col md:overflow-hidden md:p-0 md:gap-0">
           {/* Sticky header */}
-          <div className="shrink-0 border-b border-border bg-background/80 backdrop-blur-sm px-8 py-5">
+          <div className="shrink-0 border-b border-border bg-background/80 backdrop-blur-sm px-4 sm:px-8 py-3.5 sm:py-5">
             <div className="flex items-center justify-between gap-4">
-              <div className="flex items-center gap-4 min-w-0">
-                <h4 className="font-display text-xl md:text-2xl font-bold text-foreground tracking-tight truncate">
+              <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                <h4 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-foreground tracking-tight truncate">
                   {project.title}
                 </h4>
-                <span className="shrink-0 text-[11px] uppercase tracking-widest text-muted-foreground border border-border rounded-full px-3 py-0.5">
+                <span className="shrink-0 text-[10px] sm:text-[11px] uppercase tracking-widest text-muted-foreground border border-border rounded-full px-2.5 sm:px-3 py-0.5">
                   {project.category}
                 </span>
               </div>
-              <div className="shrink-0 flex items-center gap-4">
+              <div className="shrink-0 flex items-center gap-3 sm:gap-4">
                 {project.github && project.github !== "#" && (
                   <Link
                     href={project.github}
@@ -90,7 +90,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
                 )}
                 {project.live && project.live !== "#" && (
                   <Link href={project.live} target="_blank">
-                    <button className="group flex items-center gap-2 bg-primary text-primary-foreground text-sm font-medium px-4 py-1.5 rounded-full hover:bg-primary/80 transition-colors">
+                    <button className="group flex items-center gap-1.5 sm:gap-2 bg-primary text-primary-foreground text-xs sm:text-sm font-medium px-3 sm:px-4 py-1.5 rounded-full hover:bg-primary/80 transition-colors">
                       {project.live.includes("youtu") ? "Watch Video" : "Visit"}
                       <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </button>
@@ -102,7 +102,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
 
           {/* Scrollable content */}
           <ScrollArea className="flex-1" type="always" data-lenis-prevent>
-            <div className="px-8 py-8">
+            <div className="px-4 sm:px-8 py-5 sm:py-8">
               {/* Tech stack */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}

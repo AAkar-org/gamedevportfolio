@@ -9,17 +9,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 const ExperienceSection = () => {
   return (
     <SectionWrapper
-      className="flex flex-col items-center justify-center min-h-[120vh] py-20"
+      id="experience"
+      className="flex flex-col items-center justify-center min-h-screen py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
     >
-      <div className="w-full max-w-4xl px-4 md:px-8 mx-auto">
+      <div className="w-full max-w-4xl mx-auto">
         <SectionHeader
           id="experience"
           title="Experience"
           desc="My professional journey."
-          className="mb-12 md:mb-20 mt-0"
+          className="mb-8 md:mb-16 mt-0"
         />
 
-        <div className="flex flex-col gap-8 md:gap-12 relative">
+        <div className="flex flex-col gap-6 md:gap-12 relative">
           {/* Connector Line - simplified to a subtle border */}
           <div className="absolute left-8 md:left-1/2 top-4 bottom-4 w-px bg-border hidden md:block -translate-x-1/2" />
 
@@ -59,29 +60,29 @@ const ExperienceCard = ({
           "shadow-sm hover:shadow-md"
         )}
       >
-        <CardHeader className="pb-3">
-          <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+        <CardHeader className="p-4 sm:p-6 pb-2 sm:pb-3">
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 sm:gap-4">
             <div className="space-y-1">
-              <CardTitle className="text-xl font-bold tracking-tight">
+              <CardTitle className="text-lg sm:text-xl font-bold tracking-tight">
                 {experience.title}
               </CardTitle>
-              <div className="text-base font-medium text-muted-foreground">
+              <div className="text-sm sm:text-base font-medium text-muted-foreground">
                 {experience.company}
               </div>
             </div>
-            <Badge variant="secondary" className="w-fit font-mono text-xs font-normal">
+            <Badge variant="secondary" className="w-fit font-mono text-[11px] sm:text-xs font-normal shrink-0">
               {experience.startDate} - {experience.endDate}
             </Badge>
           </div>
         </CardHeader>
-        <CardContent className="space-y-6">
-          <ul className="list-disc list-outside ml-4 space-y-2 text-base text-muted-foreground leading-relaxed">
+        <CardContent className="p-4 sm:p-6 pt-2 sm:pt-4 space-y-4 sm:space-y-6">
+          <ul className="list-disc list-outside ml-4 space-y-2 text-sm sm:text-base text-muted-foreground leading-relaxed">
             {experience.description.map((point, i) => (
               <li key={i}>{point}</li>
             ))}
           </ul>
 
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {experience.skills.map((skillName) => {
               const skill = SKILLS[skillName as SkillNames];
               return (

@@ -75,51 +75,53 @@ const Header = ({ loader, githubStars }: HeaderProps) => {
         }}
       >
       </div> */}
-      <div className={cn(styles.bar, "flex items-center justify-between")}>
+      <div className={cn(styles.bar, "flex items-center justify-between w-full")}>
         <Link
           href="/"
           onClick={handleLogoClick}
-          className="flex items-center justify-center"
+          className="flex items-center justify-center shrink-0"
         >
-          <Button variant={"link"} className="text-md">
+          <Button variant={"link"} className="text-sm sm:text-md font-bold px-0 sm:px-2">
             {config.author}
           </Button>
         </Link>
 
-        <FunnyThemeToggle className="w-6 h-6 mr-4 hidden md:flex" />
-        {isHome && process.env.NEXT_PUBLIC_WS_URL && (
-          <div className="flex items-center">
-            <GameTrigger className="mr-3" />
-            <OnlineUsers />
-          </div>
-        )}
-        {githubStars}
-        <Button
-          variant={"ghost"}
-          onClick={() => setIsActive(!isActive)}
-          aria-label={isActive ? "Close menu" : "Open menu"}
-          aria-expanded={isActive}
-          className={cn(
-            styles.el,
-            "m-0 p-0 h-6 bg-transparent flex items-center justify-center"
+        <div className="flex items-center gap-2 sm:gap-3">
+          <FunnyThemeToggle className="w-6 h-6 mr-1 hidden md:flex" />
+          {isHome && process.env.NEXT_PUBLIC_WS_URL && (
+            <div className="flex items-center">
+              <GameTrigger className="mr-2" />
+              <OnlineUsers />
+            </div>
           )}
-        >
-          <div className="relative hidden md:flex items-center">
-            <motion.p
-              variants={opacity}
-              animate={!isActive ? "open" : "closed"}
-            >
-              Menu
-            </motion.p>
-            <motion.p variants={opacity} animate={isActive ? "open" : "closed"}>
-              Close
-            </motion.p>
-          </div>
-          <div
-            className={`${styles.burger} ${isActive ? styles.burgerActive : ""
-              }`}
-          ></div>
-        </Button>
+          {githubStars}
+          <Button
+            variant={"ghost"}
+            onClick={() => setIsActive(!isActive)}
+            aria-label={isActive ? "Close menu" : "Open menu"}
+            aria-expanded={isActive}
+            className={cn(
+              styles.el,
+              "m-0 p-0 h-6 bg-transparent flex items-center justify-center cursor-pointer"
+            )}
+          >
+            <div className="relative hidden md:flex items-center">
+              <motion.p
+                variants={opacity}
+                animate={!isActive ? "open" : "closed"}
+              >
+                Menu
+              </motion.p>
+              <motion.p variants={opacity} animate={isActive ? "open" : "closed"}>
+                Close
+              </motion.p>
+            </div>
+            <div
+              className={`${styles.burger} ${isActive ? styles.burgerActive : ""
+                }`}
+            ></div>
+          </Button>
+        </div>
       </div>
       <motion.div
         variants={background}
