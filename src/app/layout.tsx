@@ -17,6 +17,7 @@ import Script from "next/script";
 import SiteFrame from "@/components/site-frame";
 import { Providers } from "@/components/providers";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/next";
 import { UMAMI_SRC } from "@/lib/umami";
 import ServiceWorkerCleaner from "@/components/sw-cleaner";
 
@@ -98,6 +99,7 @@ export default function RootLayout({
             {children}
           </SiteFrame>
         </Providers>
+        <Analytics />
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         )}

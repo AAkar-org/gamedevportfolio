@@ -79,13 +79,16 @@ const HeroSection = () => {
                   </p>
                 </BlurIn>
                 <BlurIn delay={1.4}>
-                  <div className="mt-3 flex items-center gap-2 text-xs font-mono text-primary bg-primary/10 border border-primary/20 px-3 py-1.5 rounded-2xl sm:rounded-full w-fit max-w-full">
+                  <Link
+                    href="/#about"
+                    className="mt-3 flex items-center gap-2 text-xs font-mono text-primary bg-primary/10 hover:bg-primary/20 border border-primary/20 hover:border-primary/40 transition-colors px-3 py-1.5 rounded-2xl sm:rounded-full w-fit max-w-full"
+                  >
                     <span className="relative flex h-2 w-2 shrink-0">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                     </span>
-                    <span className="truncate sm:whitespace-normal">Upcoming: Niagara Fluid Simulation</span>
-                  </div>
+                    <span className="truncate sm:whitespace-normal">Upcoming: SURVIVING THE ADVENTURES OF ISLA SENTINEL</span>
+                  </Link>
                 </BlurIn>
               </div>
               <div className="mt-6 sm:mt-8 flex flex-col gap-3 w-full sm:w-fit">
