@@ -53,14 +53,21 @@ const ProjectCard = ({ project }: { project: Project }) => {
               bg={`/assets/backgrounds/${project.id}.jpg`}
               isHovered={isHovered}
             />
-            <div className="absolute w-full h-24 bottom-0 left-0 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-10">
-              <div className="flex flex-col h-full items-start justify-end p-4">
-                <div className="text-base sm:text-lg text-left font-bold text-foreground">
+            <div className="absolute w-full min-h-24 pb-3 pt-6 bottom-0 left-0 bg-gradient-to-t from-background via-background/85 to-transparent pointer-events-none z-10">
+              <div className="flex flex-col h-full items-start justify-end px-4">
+                <div className="text-base sm:text-lg text-left font-bold text-foreground line-clamp-1">
                   {project.title}
                 </div>
-                <div className="text-xs bg-primary text-primary-foreground rounded-lg w-fit px-2">
-                  {project.category}
+                <div className="flex items-center gap-2 flex-wrap mt-0.5">
+                  <div className="text-xs bg-primary text-primary-foreground rounded-lg w-fit px-2">
+                    {project.category}
+                  </div>
                 </div>
+                {project.description && (
+                  <p className="text-[11px] sm:text-xs text-muted-foreground font-mono mt-1 text-left line-clamp-1">
+                    {project.description}
+                  </p>
+                )}
               </div>
             </div>
           </div>

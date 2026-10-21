@@ -104,6 +104,7 @@ export type Project = {
   id: string;
   category: string;
   title: string;
+  description?: string;
   src: string;
   screenshots: string[];
   skills: { frontend: Skill[]; backend: Skill[] };
@@ -117,6 +118,7 @@ const projects: Project[] = [
     id: "isla-sentinel",
     category: "Unreal Engine 5 • Major Project",
     title: "Surviving the Adventures of Isla Sentinel",
+    description: "Water advanced and water plugins used in making the ocean",
     src: `${BASE_PATH}/isla-sentinel/water-island.jpg`,
     screenshots: ["water-island.jpg"],
     skills: {
@@ -137,12 +139,19 @@ const projects: Project[] = [
     get content() {
       return (
         <div className="space-y-6">
+          <TypographyP className="font-mono text-xl font-bold">
+            Implemented Niagara Fluid Simulations
+          </TypographyP>
+          <TypographyP className="font-mono leading-relaxed">
+            Water advanced and water plugins used in making the ocean.
+          </TypographyP>
+
           {/* Environment Showcase Video */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono font-bold text-foreground flex items-center gap-2">
                 <Play className="w-3.5 h-3.5 text-primary fill-current" />
-                Environment Showcase: Water Island
+                Implemented Niagara Fluid Simulations: Water Island
               </span>
               <span className="text-[10px] font-mono text-muted-foreground border border-border px-2 py-0.5 rounded">
                 1080p • 60 FPS • 0:23
@@ -168,6 +177,9 @@ const projects: Project[] = [
           <TypographyH3 className="my-4 mt-8">Core Gameplay Systems</TypographyH3>
           <ul className="list-disc list-outside ml-6 space-y-2 font-mono text-sm text-muted-foreground">
             <li>
+              <strong className="text-foreground">Ocean &amp; Water Simulation:</strong> Water advanced and water plugins used in making the ocean, integrating Niagara fluid systems and real-time buoyancy.
+            </li>
+            <li>
               <strong className="text-foreground">Atmospheric World Architecture:</strong> Built with Unreal Engine 5 real-time dynamic global illumination (Lumen) and high-density geometric detail (Nanite).
             </li>
             <li>
@@ -188,6 +200,7 @@ const projects: Project[] = [
     id: "ue-enemy-ai",
     category: "Unreal Engine 5.6 • AI & Gameplay",
     title: "Enemy AI Patrolling & Chase System",
+    description: "Autonomous cyclic patrolling & dynamic player detection system",
     src: `${BASE_PATH}/ue-enemy-ai/thumbnail.jpg`,
     screenshots: ["thumbnail.jpg", "env.jpg", "platform.jpg"],
     skills: {
@@ -258,6 +271,7 @@ const projects: Project[] = [
     id: "ue-survival",
     category: "Unreal Engine 5.6 • Combat & Mechanics",
     title: "Survival Game Prototype",
+    description: "Third-person survival adventure with dynamic enemy pursuit & axe combat",
     src: `${BASE_PATH}/ue-survival/thumbnail.jpg`,
     screenshots: ["thumbnail.jpg", "combat.jpg", "locomotion.jpg", "hud.jpg"],
     skills: {
@@ -373,6 +387,7 @@ const projects: Project[] = [
     id: "unity-platformer",
     category: "Unity • 2D Platformer",
     title: "2D Platformer Game Designer and Tester",
+    description: "High-precision 2D platformer with GDD-led grapple mechanics & QA testing",
     src: `${BASE_PATH}/unity-platformer/thumbnail.jpg`,
     screenshots: ["grappling.jpg", "platforming.jpg", "acid-traversal.jpg"],
     skills: {
