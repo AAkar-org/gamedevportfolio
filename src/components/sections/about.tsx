@@ -328,7 +328,7 @@ const AboutSection = () => {
                     </Button>
                   </Link>
                   <Link
-                    href="https://discord.gg/c2dNgbVkpV"
+                    href="https://discord.com/invite/c2dNgbVkpV"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 sm:flex-none"
