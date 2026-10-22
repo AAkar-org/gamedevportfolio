@@ -45,7 +45,7 @@ const AboutSection = () => {
         >
           <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 via-background to-secondary/30 p-4 sm:p-6 md:p-8 backdrop-blur-md shadow-lg">
             <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl pointer-events-none" />
-            
+
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-center">
               <div className="lg:col-span-7 space-y-3 sm:space-y-4">
                 <div className="flex flex-wrap items-center gap-2">
@@ -328,7 +328,7 @@ const AboutSection = () => {
                     </Button>
                   </Link>
                   <Link
-                    href="https://discord.gg/subkE5r5"
+                    href="https://discord.gg/c2dNgbVkpV"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 sm:flex-none"
@@ -374,7 +374,7 @@ const AboutSection = () => {
                     className="object-cover transition-transform duration-500 group-hover:scale-105 filter brightness-95"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent" />
-                  
+
                   {/* Central Play Button */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-red-600 transition-all ring-4 ring-white/10">
