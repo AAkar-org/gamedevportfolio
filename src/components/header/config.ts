@@ -4,37 +4,27 @@ const links: Link[] = [
   {
     title: 'Home',
     href: '/',
-    thumbnail: '/assets/nav-link-previews/landing.png'
+    thumbnail: '/assets/seo/og-image.png'
   },
   {
     title: 'About',
     href: '/#about',
-    thumbnail: '/assets/nav-link-previews/about.png'
+    thumbnail: '/assets/projects-screenshots/isla-sentinel/water-island.jpg'
   },
   {
     title: 'Skills',
     href: '/#skills',
-    thumbnail: '/assets/nav-link-previews/skills.png'
+    thumbnail: '/assets/projects-screenshots/ue-enemy-ai/thumbnail.jpg'
   },
   {
     title: 'Projects',
     href: '/#projects',
-    thumbnail: '/assets/nav-link-previews/projects.png'
+    thumbnail: '/assets/projects-screenshots/ue-survival/thumbnail.jpg'
   },
-  // {
-  //   title: 'Skills',
-  //   href: '/skills',
-  //   thumbnail: '/assets/nav-link-previews/skills.png'
-  // },
-  // {
-  //   title: 'Testimonials',
-  //   href: '/testimonials',
-  //   thumbnail: '/assets/nav-link-previews/testimonials.png'
-  // },
   {
     title: 'Contact',
     href: '/#contact',
-    thumbnail: '/assets/nav-link-previews/contact.png'
+    thumbnail: '/assets/projects-screenshots/unity-platformer/thumbnail.jpg'
   }
 ];
 

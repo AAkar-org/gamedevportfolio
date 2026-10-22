@@ -1,28 +1,26 @@
 <div align="center">
 
-# 🚀 3D Portfolio
+# 🚀 Hardik Jain | Game Developer Portfolio
 
-**A developer portfolio you can actually play with.** Press keys on a 3D keyboard, watch other visitors' cursors fly by, and chat with whoever's online.
+**A developer portfolio you can actually play with.** Press keys on a 3D keyboard, explore game projects in Unity and Unreal Engine 5.
 
-### [✨ Live Demo → nareshkhatri.dev](https://nareshkhatri.dev)
+### [✨ Live Site → hardikjaingamedev.online](https://hardikjaingamedev.online)
 
-[![GitHub stars](https://img.shields.io/github/stars/Naresh-Khatri/3d-portfolio?style=flat&logo=github)](https://github.com/Naresh-Khatri/3d-portfolio/stargazers)
-[![Forks](https://img.shields.io/github/forks/Naresh-Khatri/3d-portfolio?style=flat&logo=github)](https://github.com/Naresh-Khatri/3d-portfolio/network/members)
+[![GitHub stars](https://img.shields.io/github/stars/AAkar-org/gamedevportfolio?style=flat&logo=github)](https://github.com/AAkar-org/gamedevportfolio/stargazers)
+[![Forks](https://img.shields.io/github/forks/AAkar-org/gamedevportfolio?style=flat&logo=github)](https://github.com/AAkar-org/gamedevportfolio/network/members)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Naresh-Khatri/3d-portfolio)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/AAkar-org/gamedevportfolio)
 
 <!-- swap for demo video: drag an .mp4 into the GitHub web editor, paste the user-attachments URL on its own line here -->
-![Portfolio Preview](https://github.com/Naresh-Khatri/3d-portfolio/blob/main/public/assets/projects-screenshots/portfolio/landing.png?raw=true)
+![Portfolio Preview](/assets/seo/og-image.png)
 
 </div>
 
-> **Free to use!** This portfolio is open source. If you use it, a credit/link back would be really appreciated 🙏
-
 ## ✨ Features
 
-- **Interactive 3D Keyboard** — Programmatically generated Chibi keyboard where each keycap represents a skill, revealing titles and descriptions on hover/press. Try colors, logos, and layouts in the [Chibi keycap customizer](https://chibi.nareshkhatri.dev/demo/keycaps).
+- **Interactive 3D Keyboard** — Programmatically generated Chibi keyboard where each keycap represents a skill, revealing titles and descriptions on hover/press. Configure colors, logos, and layouts directly in `SKILLS`.
 - **Live Multiplayer** — See other visitors' cursors in realtime, who's online, and chat with them ([details](#-realtime-features-optional))
 - **Buttery Animations** — GSAP + Framer Motion powered scroll, hover, and reveal animations
 - **Space Theme** — Floating particles on a dark canvas for a cosmic vibe
@@ -57,8 +55,8 @@
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/Naresh-Khatri/3d-portfolio.git
-    cd 3d-portfolio
+    git clone https://github.com/AAkar-org/gamedevportfolio.git
+    cd gamedevportfolio
     ```
 
 2. **Install dependencies:**
@@ -151,7 +149,7 @@ Other files you'll want to customize:
 
 ## ⌨️ Customize the 3D keyboard
 
-Try colors, logos, and layouts in the [Chibi keycap customizer](https://chibi.nareshkhatri.dev/demo/keycaps), then apply your choices to `SKILLS` in [`src/data/constants.ts`](src/data/constants.ts):
+Try colors, logos, and layouts directly in `SKILLS` in [`src/data/constants.ts`](src/data/constants.ts):
 
 - `keyboardColor`: keycap color, such as `"#ff9408"`.
 - `keyboardIcon`: copy an SVG URL from [thesvg.org](https://thesvg.org) and paste it here. You can also use a local file under `public/assets/keyboard/logos/`.
@@ -183,7 +181,7 @@ These features activate automatically when the `NEXT_PUBLIC_WS_URL` environment 
 
 ## 🚀 Deployment
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Naresh-Khatri/3d-portfolio)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/AAkar-org/gamedevportfolio)
 
 This site is deployed on **Vercel**. To deploy your own:
 
@@ -203,7 +201,3 @@ If you'd like to contribute or suggest improvements, feel free to open an issue 
 ## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
-
-If you use this portfolio, a credit or link back to the [original repo](https://github.com/Naresh-Khatri/3d-portfolio) would be much appreciated ❤️
-
-Note on analytics: a deployed copy reports its own hostname once per browser (nothing else — no visitor, page, or referrer data) so I can see where the template gets used.

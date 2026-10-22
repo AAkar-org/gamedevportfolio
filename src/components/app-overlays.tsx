@@ -7,7 +7,6 @@ import EasterEggs from "@/components/easter-eggs";
 import ElasticCursor from "@/components/ui/ElasticCursor";
 import MotionNudge from "@/components/motion-nudge";
 import DomainNotice from "@/components/domain-notice";
-import Analytics from "@/components/analytics";
 import { usePerfProfile } from "@/hooks/use-perf-profile";
 
 export default function AppOverlays() {
@@ -32,7 +31,6 @@ export default function AppOverlays() {
       {!isResume && !disableDecorative && <ElasticCursor />}
       {isHome && <MotionNudge />}
       <DomainNotice />
-      <Analytics />
     </>
   );
 }
