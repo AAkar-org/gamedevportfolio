@@ -22,6 +22,11 @@ const links: Link[] = [
     thumbnail: '/assets/projects-screenshots/ue-survival/thumbnail.jpg'
   },
   {
+    title: 'YouTube',
+    href: '/#youtube',
+    thumbnail: '/assets/youtube/banner.jpg'
+  },
+  {
     title: 'Contact',
     href: '/#contact',
     thumbnail: '/assets/projects-screenshots/unity-platformer/thumbnail.jpg'
